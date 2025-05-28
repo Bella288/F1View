@@ -23,6 +23,8 @@
             height: 40px;
             border-radius: 50%;
             background: rgba(225,6,0,0.18);
+            border: 2px solid white; /* Thin white outline */
+            box-sizing: border-box;
         }
         .car-part:hover {
             transform: scale(1.05);
@@ -146,9 +148,13 @@
             <div class="car-part" style="left:16.15%; top:38.33%;" data-part="drs">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">DRS</div>
             </div>
+            <!-- NEW: Additional Wheel Click Area at 190,301 -->
+            <div class="car-part" style="left:23.75%; top:37.62%;" data-part="wheels">
+                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
+            </div>
         </div>
 
-        <!-- INTERIOR VIEW: now a sibling, not nested inside exterior -->
+        <!-- INTERIOR VIEW -->
         <div id="interior-view" class="car-container hidden">
             <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_INTERIOR.jpg" alt="F1 Car Interior" class="w-full">
             <!-- Steering Wheel -->
@@ -166,6 +172,14 @@
             <!-- Halo -->
             <div class="car-part" style="left:54.38%; top:49.70%;" data-part="halo-interior">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Halo</div>
+            </div>
+            <!-- NEW: Left Wheel Click Area at 367,549 -->
+            <div class="car-part" style="left:24.47%; top:36.60%;" data-part="wheels">
+                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
+            </div>
+            <!-- NEW: Right Wheel Click Area at 1228,505 -->
+            <div class="car-part" style="left:81.87%; top:33.67%;" data-part="wheels">
+                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
             </div>
         </div>
 
@@ -187,7 +201,7 @@
                 // Exterior parts
                 'front-wing': {
                     name: 'Front Wing',
-                    description: 'The front wing is crucial for directing airflow around the car. It creates downforce at the front to balance the car and helps manage the airflow to the rest of the vehicle.',
+                    description: 'The front wing is crucial for directing airflow around the car. It creates downforce at the front to balance the car and helps manage the airflow to the rest of the car.',
                     fact: 'Front wings can generate up to 25% of the car\'s total downforce.'
                 },
                 'nose': {
@@ -202,7 +216,7 @@
                 },
                 'halo': {
                     name: 'Halo Safety Device',
-                    description: 'The halo is a titanium structure that protects the driver\'s head from impacts with other cars or debris. Introduced in 2018, it has proven extremely effective in several accidents.',
+                    description: 'The halo is a titanium structure that protects the driver\'s head from impacts with other cars or debris. Introduced in 2018, it has proven extremely effective in saving lives.',
                     fact: 'The halo weighs about 7kg but can support loads of up to 12,000kg.'
                 },
                 'rear-wing': {
@@ -222,29 +236,29 @@
                 },
                 'drs': {
                     name: 'DRS (Drag Reduction System)',
-                    description: 'DRS is an adjustable rear wing that can open to reduce aerodynamic drag on straights, increasing top speed. It can only be used when within 1 second of another car in designated zones.',
+                    description: 'DRS is an adjustable rear wing that can open to reduce aerodynamic drag on straights, increasing top speed. It can only be used when within 1 second of another car.',
                     fact: 'DRS can increase straight-line speed by 10-15 km/h (6-9 mph) by reducing drag by up to 25%.'
                 },
 
                 // Interior parts
                 'steering-wheel': {
                     name: 'Steering Wheel',
-                    description: 'An F1 steering wheel is a complex computer interface with over 20 buttons, switches, and rotary controls. Drivers can adjust engine mapping, differential settings, brake bias, and more on the fly.',
+                    description: 'An F1 steering wheel is a complex computer interface with over 20 buttons, switches, and rotary controls. Drivers can adjust engine mapping, differential settings, and more.',
                     fact: 'F1 steering wheels can weigh as little as 1.3kg and take over 100 hours to manufacture.'
                 },
                 'pedals': {
                     name: 'Pedals',
-                    description: 'F1 cars have two pedals (no clutch pedal except for launch). The brake pedal is on the left, throttle on the right. Brakes can generate over 5G of deceleration. Drivers use left-foot braking.',
+                    description: 'F1 cars have two pedals (no clutch pedal except for launch). The brake pedal is on the left, throttle on the right. Brakes can generate over 5G of deceleration.',
                     fact: 'Brake pedal pressure can exceed 150kg during heavy braking, with temperatures reaching 1,000°C (1,832°F).'
                 },
                 'seat': {
                     name: 'Driver\'s Seat',
-                    description: 'The seat is custom-molded to each driver for perfect fit and support during high G-forces. Made from carbon fiber with energy-absorbing materials, it\'s designed to be removed quickly in an emergency.',
+                    description: 'The seat is custom-molded to each driver for perfect fit and support during high G-forces. Made from carbon fiber with energy-absorbing materials, it\'s designed for safety and comfort.',
                     fact: 'Seats are so tight that drivers often lose 2-3kg of weight during a race from dehydration.'
                 },
                 'halo-interior': {
                     name: 'Halo (Interior View)',
-                    description: 'From inside the cockpit, the Halo appears as a central pillar in the driver\'s field of vision. While initially controversial, drivers quickly adapted to it. The Halo does not obstruct the driver\'s view as much as it appears from outside.',
+                    description: 'From inside the cockpit, the Halo appears as a central pillar in the driver\'s field of vision. While initially controversial, drivers quickly adapted to it. The structure provides crucial protection.',
                     fact: 'During development, 90% of drivers said they could spot a Formula 2 car approaching with the Halo fitted.'
                 }
             };
