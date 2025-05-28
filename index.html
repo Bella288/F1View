@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Car Parts Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .car-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .car-part {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .car-part:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
+        }
+        
+        .part-tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .car-part:hover .part-tooltip {
+            opacity: 1;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #1a1a1a;
+            color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            position: relative;
+            border: 2px solid #e10600;
+            box-shadow: 0 0 20px rgba(225, 6, 0, 0.5);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #e10600;
+        }
+        
+        .tab-button {
+            transition: all 0.3s;
+        }
+        
+        .tab-button.active {
+            background-color: #e10600;
+            color: white;
+        }
+        
+        @media (max-width: 640px) {
+            .car-part {
+                width: 30px !important;
+                height: 30px !important;
+            }
+            
+            .part-tooltip {
+                font-size: 10px;
+                padding: 3px 6px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-red-600">F1 CAR EXPLORER</h1>
+            <p class="text-gray-300 max-w-2xl mx-auto">Interactive guide to Formula 1 car components. Click on any part to learn more.</p>
+        </header>
+        
+        <div class="flex justify-center mb-6">
+            <div class="inline-flex rounded-md shadow-sm" role="group">
+                <button id="exterior-btn" class="tab-button px-4 py-2 text-sm font-medium rounded-l-lg bg-gray-800 hover:bg-gray-700 active">
+                    <i class="fas fa-car mr-2"></i>Exterior
+                </button>
+                <button id="interior-btn" class="tab-button px-4 py-2 text-sm font-medium rounded-r-lg bg-gray-800 hover:bg-gray-700">
+                    <i class="fas fa-tachometer-alt mr-2"></i>Interior
+                </button>
+            </div>
+        </div>
+        
+        <div id="exterior-view" class="car-container">
+            <img src="https://www.formula1.com/content/dam/fom-website/manual/Misc/2021manual/2021CarManualNEW.png" alt="F1 Car" class="w-full">
+            
+            <!-- Front Wing -->
+            <div class="car-part" style="width: 100px; height: 30px; top: 30%; left: 5%;" data-part="front-wing">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Front Wing</div>
+            </div>
+            
+            <!-- Nose -->
+            <div class="car-part" style="width: 40px; height: 40px; top: 32%; left: 18%;" data-part="nose">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Nose</div>
+            </div>
+            
+            <!-- Sidepods -->
+            <div class="car-part" style="width: 80px; height: 60px; top: 40%; left: 35%;" data-part="sidepods">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Sidepods</div>
+            </div>
+            
+            <!-- Halo -->
+            <div class="car-part" style="width: 60px; height: 30px; top: 25%; left: 30%;" data-part="halo">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Halo</div>
+            </div>
+            
+            <!-- Rear Wing -->
+            <div class="car-part" style="width: 80px; height: 40px; top: 30%; left: 75%;" data-part="rear-wing">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Rear Wing</div>
+            </div>
+            
+            <!-- Diffuser -->
+            <div class="car-part" style="width: 100px; height: 30px; top: 65%; left: 65%;" data-part="diffuser">
+                <div class="part-tooltip" style="top: 40px; left: 50%; transform: translateX(-50%);">Diffuser</div>
+            </div>
+            
+            <!-- Wheels -->
+            <div class="car-part" style="width: 50px; height: 50px; top: 60%; left: 25%;" data-part="front-wheel">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Front Wheel</div>
+            </div>
+            
+            <div class="car-part" style="width: 50px; height: 50px; top: 60%; left: 65%;" data-part="rear-wheel">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Rear Wheel</div>
+            </div>
+            
+            <!-- DRS -->
+            <div class="car-part" style="width: 60px; height: 20px; top: 25%; left: 72%;" data-part="drs">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">DRS</div>
+            </div>
+        </div>
+        
+        <div id="interior-view" class="car-container hidden">
+            <img src="https://www.formula1.com/content/dam/fom-website/manual/Misc/2021manual/2021CarCockpitManual.png" alt="F1 Car Interior" class="w-full">
+            
+            <!-- Steering Wheel -->
+            <div class="car-part" style="width: 80px; height: 50px; top: 40%; left: 45%;" data-part="steering-wheel">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Steering Wheel</div>
+            </div>
+            
+            <!-- Pedals -->
+            <div class="car-part" style="width: 60px; height: 30px; top: 70%; left: 45%;" data-part="pedals">
+                <div class="part-tooltip" style="top: 40px; left: 50%; transform: translateX(-50%);">Pedals</div>
+            </div>
+            
+            <!-- Seat -->
+            <div class="car-part" style="width: 60px; height: 80px; top: 30%; left: 50%;" data-part="seat">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Seat</div>
+            </div>
+            
+            <!-- Halo -->
+            <div class="car-part" style="width: 60px; height: 30px; top: 20%; left: 50%;" data-part="halo-interior">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Halo</div>
+            </div>
+            
+            <!-- Headrest -->
+            <div class="car-part" style="width: 40px; height: 30px; top: 25%; left: 52%;" data-part="headrest">
+                <div class="part-tooltip" style="top: -30px; left: 50%; transform: translateX(-50%);">Headrest</div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="part-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="part-name" class="text-2xl font-bold mb-4 text-red-600"></h2>
+            <div id="part-description" class="text-gray-300"></div>
+            <div id="part-facts" class="mt-4 p-4 bg-gray-800 rounded-lg hidden">
+                <h3 class="font-bold text-red-500 mb-2">Fun Fact</h3>
+                <p id="fact-text"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Part information database
+        const partsData = {
+            // Exterior parts
+            'front-wing': {
+                name: 'Front Wing',
+                description: 'The front wing is crucial for directing airflow around the car. It creates downforce at the front to balance the car and helps manage the airflow to the rest of the vehicle. Modern front wings are incredibly complex with multiple elements that can be adjusted to fine-tune performance.',
+                fact: 'Front wings can generate up to 25% of the car\'s total downforce.'
+            },
+            'nose': {
+                name: 'Nose Cone',
+                description: 'The nose cone is the forward-most part of the car that helps direct air under the car and around the sides. It must be strong enough to pass crash tests while being as light as possible. The shape affects how air flows to the underbody and rear of the car.',
+                fact: 'The nose must withstand an impact of 15kN (about 1.5 tons) without failing safety tests.'
+            },
+            'sidepods': {
+                name: 'Sidepods',
+                description: 'Sidepods house the radiators that cool the engine and other components. Their shape is critical for aerodynamic performance, as they influence how air flows to the rear of the car. Teams spend countless hours optimizing sidepod design in wind tunnels.',
+                fact: 'Sidepod temperatures can reach up to 120°C (248°F) during a race.'
+            },
+            'halo': {
+                name: 'Halo Safety Device',
+                description: 'The halo is a titanium structure that protects the driver\'s head from impacts with other cars or debris. Introduced in 2018, it has proven extremely effective in several serious accidents. It can withstand the weight of a double-decker bus.',
+                fact: 'The halo weighs about 7kg but can support loads of up to 12,000kg.'
+            },
+            'rear-wing': {
+                name: 'Rear Wing',
+                description: 'The rear wing generates significant downforce to keep the rear tires planted on the track, especially during cornering. It consists of multiple elements that can be adjusted for different tracks. The DRS (Drag Reduction System) allows the rear wing to open on straights to reduce drag and increase speed.',
+                fact: 'At high speed, the rear wing can generate enough downforce to theoretically allow the car to drive upside down.'
+            },
+            'diffuser': {
+                name: 'Diffuser',
+                description: 'The diffuser accelerates air from under the car, creating low pressure that sucks the car onto the track (ground effect). It works in conjunction with the floor and rear wing to maximize downforce while minimizing drag. The shape is tightly regulated by FIA rules.',
+                fact: 'A well-designed diffuser can increase downforce by up to 40% without adding significant drag.'
+            },
+            'front-wheel': {
+                name: 'Front Wheel & Suspension',
+                description: 'The front wheels are connected to a complex suspension system that allows precise steering and absorbs bumps. The tires are specially designed for F1 with different compounds for various conditions. Wheel nuts are designed for quick changes during pit stops.',
+                fact: 'F1 tires can reach temperatures of 130°C (266°F) during racing conditions.'
+            },
+            'rear-wheel': {
+                name: 'Rear Wheel & Suspension',
+                description: 'The rear wheels deliver power from the engine to the track. The suspension must handle both the downforce loads and power delivery while maintaining optimal tire contact. Rear tires are wider than front tires to handle the power output.',
+                fact: 'An F1 car can accelerate from 0-100 km/h (0-62 mph) in about 2.6 seconds, thanks largely to rear tire grip.'
+            },
+            'drs': {
+                name: 'DRS (Drag Reduction System)',
+                description: 'DRS is an adjustable rear wing that can open to reduce aerodynamic drag on straights, increasing top speed. It can only be used when within 1 second of another car in designated zones. The system is controlled by the driver with a button on the steering wheel.',
+                fact: 'DRS can increase straight-line speed by 10-15 km/h (6-9 mph) by reducing drag by up to 25%.'
+            },
+            
+            // Interior parts
+            'steering-wheel': {
+                name: 'Steering Wheel',
+                description: 'An F1 steering wheel is a complex computer interface with over 20 buttons, switches, and rotary controls. Drivers can adjust engine mapping, differential settings, brake balance, and more while driving. The wheel also displays critical information and costs about $50,000 to produce.',
+                fact: 'F1 steering wheels can weigh as little as 1.3kg and take over 100 hours to manufacture.'
+            },
+            'pedals': {
+                name: 'Pedals',
+                description: 'F1 cars have two pedals (no clutch pedal except for launch). The brake pedal is on the left, throttle on the right. Brakes can generate over 5G of deceleration. Drivers use their left foot for braking and right foot for acceleration, unlike road cars.',
+                fact: 'Brake pedal pressure can exceed 150kg during heavy braking, with temperatures reaching 1,000°C (1,832°F).'
+            },
+            'seat': {
+                name: 'Driver\'s Seat',
+                description: 'The seat is custom-molded to each driver for perfect fit and support during high G-forces. Made from carbon fiber with energy-absorbing materials, it\'s designed to be removed from the car with the driver in serious accidents. Drivers are effectively "wearing" the car.',
+                fact: 'Seats are so tight that drivers often lose 2-3kg of weight during a race from dehydration.'
+            },
+            'halo-interior': {
+                name: 'Halo (Interior View)',
+                description: 'From inside the cockpit, the Halo appears as a central pillar in the driver\'s field of vision. While initially controversial, drivers quickly adapted to it. The Halo doesn\'t significantly impair visibility and has saved multiple lives since its introduction.',
+                fact: 'During development, 90% of drivers said they could spot a Formula 2 car approaching with the Halo fitted.'
+            },
+            'headrest': {
+                name: 'Headrest',
+                description: 'The headrest provides padding and protection for the driver\'s head. It contains radio equipment and sometimes a drinks system. The padding is designed to absorb energy in impacts while being fire-resistant. Teams often change headrests between sessions to ensure optimal condition.',
+                fact: 'Headrests must withstand 800°C (1,472°F) flames for 30 seconds without catching fire.'
+            }
+        };
+        
+        // Tab switching functionality
+        const exteriorBtn = document.getElementById('exterior-btn');
+        const interiorBtn = document.getElementById('interior-btn');
+        const exteriorView = document.getElementById('exterior-view');
+        const interiorView = document.getElementById('interior-view');
+        
+        exteriorBtn.addEventListener('click', () => {
+            exteriorBtn.classList.add('active');
+            interiorBtn.classList.remove('active');
+            exteriorView.classList.remove('hidden');
+            interiorView.classList.add('hidden');
+        });
+        
+        interiorBtn.addEventListener('click', () => {
+            interiorBtn.classList.add('active');
+            exteriorBtn.classList.remove('active');
+            interiorView.classList.remove('hidden');
+            exteriorView.classList.add('hidden');
+        });
+        
+        // Modal functionality
+        const modal = document.getElementById('part-modal');
+        const partName = document.getElementById('part-name');
+        const partDescription = document.getElementById('part-description');
+        const partFacts = document.getElementById('part-facts');
+        const factText = document.getElementById('fact-text');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // Add click events to all parts
+        document.querySelectorAll('.car-part').forEach(part => {
+            part.addEventListener('click', () => {
+                const partId = part.getAttribute('data-part');
+                const partData = partsData[partId];
+                
+                partName.textContent = partData.name;
+                partDescription.textContent = partData.description;
+                
+                if (partData.fact) {
+                    factText.textContent = partData.fact;
+                    partFacts.classList.remove('hidden');
+                } else {
+                    partFacts.classList.add('hidden');
+                }
+                
+                modal.style.display = 'flex';
+            });
+        });
+        
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Add animation to parts on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const parts = document.querySelectorAll('.car-part');
+            parts.forEach((part, index) => {
+                setTimeout(() => {
+                    part.style.opacity = '1';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
