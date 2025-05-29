@@ -414,9 +414,68 @@
                 'seat': 'https://en.wikipedia.org/wiki/Racing_seat',
                 'halo-interior': 'https://en.wikipedia.org/wiki/Halo_(safety_device)'
             };
-            // --- FULL partsData object, all parts filled out, unchanged ---
+            // --- FULL partsData object, all parts filled out, see earlier assistant messages for content ---
             const partsData = {
-                // ... (your existing partsData object here) ...
+                'front-wing': {
+                    name: 'Front Wing',
+                    description: `The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It's made from multiple carbon fiber elements and endplates, each meticulously shaped to guide air around the tires and into the rest of the car’s bodywork. Adjustments to the front wing can change the car’s balance and grip, and teams bring different designs to suit each circuit's demands. A damaged front wing can severely impact lap times due to lost downforce and disturbed airflow.`,
+                    fact: `Front wings can generate up to 25% of the car's total downforce, and each design is optimized for a specific track. They are often replaced in seconds during pit stops, and can cost over $100,000 each.`
+                },
+                'nose': {
+                    name: 'Nose Cone',
+                    description: `The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible. The design influences airflow beneath the car and toward the bargeboards and floor. Modern F1 noses are narrow and high to maximize airflow, and their structure is critical for both performance and driver safety.`,
+                    fact: `The nose must withstand an impact of 15kN (about 1.5 tons) without failing safety tests. Teams often redesign noses mid-season to optimize airflow and meet new regulations.`
+                },
+                'sidepods': {
+                    name: 'Sidepods',
+                    description: `Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently, reducing drag and increasing cooling. The shape of the sidepods is a key area of innovation, with teams experimenting with “in-wash” and “downwash” concepts to manipulate airflow to the rear of the car. Effective cooling is vital, as power units and batteries operate at high thermal loads throughout a race.`,
+                    fact: `Temperatures inside sidepods can reach up to 120°C (248°F) during a race. Teams use complex airflow simulations (CFD) to design them for maximum cooling and minimum drag.`
+                },
+                'halo': {
+                    name: 'Halo Safety Device',
+                    description: `The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars. It can withstand huge forces and is credited with saving lives in multiple high-profile accidents. Despite initial controversy over aesthetics, drivers quickly adapted, and today it's an integral safety feature. The halo also slightly affects the car’s aerodynamics, so teams design fairings to minimize drag.`,
+                    fact: `The halo weighs about 7 kg but can support loads of up to 12,000 kg—over 1.5 times the weight of a London double-decker bus. Titanium halos are manufactured to strict FIA standards and are replaced after a heavy impact.`
+                },
+                'rear-wing': {
+                    name: 'Rear Wing',
+                    description: `The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering. Its multi-element design and endplates are fine-tuned for each circuit. The main plane and flap can be adjusted, both for maximum downforce and to balance the effects of DRS (Drag Reduction System). The rear wing also helps manage airflow over the car and controls the wake for following cars, making it a focus for both performance and regulatory changes.`,
+                    fact: `At full speed, the rear wing can generate enough downforce to theoretically allow the car to drive upside down. Complex endplate designs help reduce drag and improve straight-line speed.`
+                },
+                'diffuser': {
+                    name: 'Diffuser',
+                    description: `The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce. By accelerating airflow under the car, the diffuser creates a low-pressure zone that pulls the car to the track. Its design is tightly regulated, but teams exploit every millimeter for extra performance. Modern diffusers work with the floor’s venturi tunnels to maximize suction without increasing drag.`,
+                    fact: `A well-designed diffuser can increase total car downforce by up to 40% without adding significant drag. Ground effect is so strong that a sudden loss (e.g., from bottoming out) can cause a car to spin.`
+                },
+                'wheels': {
+                    name: 'Wheels',
+                    description: `F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry conditions and treaded for wet. Each wheel contains a tire pressure monitoring system (TPMS), and wheel guns designed for rapid pit stops can remove and replace them in under two seconds. Brakes, suspension, and airflow are all designed around the wheel’s placement. The wheels must endure extreme lateral forces, temperature swings, and impacts during a race.`,
+                    fact: `F1 tires can reach temperatures of 130°C (266°F) during racing. A full set of wheels and tires costs tens of thousands of dollars, and teams use about 1,600 tires per season.`
+                },
+                'drs': {
+                    name: 'DRS (Drag Reduction System)',
+                    description: `The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing straight-line speed. DRS can only be used in specific zones and under green flag conditions. It’s a strategic tool for overtaking, but must be managed carefully as it reduces rear downforce and stability. DRS has led to more on-track action, but also requires skill to use effectively without losing control.`,
+                    fact: `DRS can increase straight-line speed by 10–15 km/h (6–9 mph) by reducing drag by up to 25%. The system is electronically controlled and monitored by race stewards to ensure compliance.`
+                },
+                'steering-wheel': {
+                    name: 'Steering Wheel',
+                    description: `An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use the wheel to change engine modes, adjust brake bias, activate DRS, make radio calls, and even engage the pit limiter. The display screen shows vital telemetry, lap times, gear selection, and warning messages. Each wheel is custom-fitted and programmed for the individual driver, and its quick-release mechanism is a key safety feature.`,
+                    fact: `F1 steering wheels can weigh as little as 1.3 kg and take over 100 hours to design and build. Some wheels cost over $50,000 and contain more than 200 components.`
+                },
+                'pedals': {
+                    name: 'Pedals',
+                    description: `F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration, while throttle mapping can be adjusted for different power delivery. There is no clutch pedal; instead, drivers use paddles behind the steering wheel for starts. Braking is a complex blend of hydraulic and regenerative systems, especially with hybrid power units.`,
+                    fact: `Brake pedal pressure can exceed 150 kg during heavy braking, with temperatures reaching 1,000°C (1,832°F). Drivers can go from 300 km/h to 50 km/h in less than 2 seconds.`
+                },
+                'seat': {
+                    name: `Driver's Seat`,
+                    description: `The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events. It's made from carbon fiber for strength and lightness, and must be easily removable in an emergency. The seat supports the driver’s body in corners and under braking, and often includes integrated headrests and safety harnesses. Comfort is limited, as a snug fit is essential for both performance and crash safety.`,
+                    fact: `Seats are so tight that drivers often lose 2–3 kg of weight during a race from dehydration. Each seat is unique, and drivers sometimes bring their mold from team to team.`
+                },
+                'halo-interior': {
+                    name: 'Halo (Interior View)',
+                    description: `From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver's field of vision. While it may seem intrusive, drivers adapt quickly and can spot apexes and rivals with minimal distraction. The central pillar is designed to minimize visual obstruction, and teams add padding and aerodynamic fairings for comfort and performance. The halo must be easily detachable for rescue operations.`,
+                    fact: `During development, 90% of drivers said they could spot a Formula 2 car approaching with the Halo fitted. The device has saved lives in several dramatic incidents since its introduction.`
+                }
             };
 
             // Tab switching functionality
@@ -424,29 +483,17 @@
             const interiorBtn = document.getElementById('interior-btn');
             const exteriorView = document.getElementById('exterior-view');
             const interiorView = document.getElementById('interior-view');
-            function showExteriorView() {
+            exteriorBtn.addEventListener('click', () => {
                 exteriorBtn.classList.add('active');
                 interiorBtn.classList.remove('active');
                 exteriorView.classList.remove('hidden');
                 interiorView.classList.add('hidden');
-            }
-            function showInteriorView() {
+            });
+            interiorBtn.addEventListener('click', () => {
                 interiorBtn.classList.add('active');
                 exteriorBtn.classList.remove('active');
                 interiorView.classList.remove('hidden');
                 exteriorView.classList.add('hidden');
-            }
-            exteriorBtn.addEventListener('click', () => {
-                showExteriorView();
-                if (!location.hash.startsWith('#exterior-')) {
-                    history.replaceState(null, '', location.pathname + '#exterior');
-                }
-            });
-            interiorBtn.addEventListener('click', () => {
-                showInteriorView();
-                if (!location.hash.startsWith('#interior-')) {
-                    history.replaceState(null, '', location.pathname + '#interior');
-                }
             });
 
             // Modal functionality
@@ -470,18 +517,18 @@
             function hideModal() {
                 modal.style.display = 'none';
                 document.body.style.overflow = '';
-                // Remove part hash from URL, but preserve tab if possible
-                if (location.hash.startsWith('#exterior-')) {
-                    history.replaceState(null, '', location.pathname + '#exterior');
-                } else if (location.hash.startsWith('#interior-')) {
-                    history.replaceState(null, '', location.pathname + '#interior');
-                } else {
-                    history.replaceState(null, '', location.pathname);
-                }
             }
-            // Main function for opening a part modal
-            function openPartModal(part, viewName) {
-                const partId = typeof part === "string" ? part : part.getAttribute('data-part');
+            document.querySelectorAll('.car-part').forEach(part => {
+                part.addEventListener('click', () => openPartModal(part));
+                part.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openPartModal(part);
+                    }
+                });
+            });
+            function openPartModal(part) {
+                const partId = part.getAttribute('data-part');
                 const partData = partsData[partId];
                 partName.textContent = partData.name;
                 partDescription.textContent = partData.description;
@@ -501,39 +548,8 @@
                 } else {
                     partLearnMore.innerHTML = '';
                 }
-                // Update hash in URL
-                let currentView = viewName;
-                if (!currentView) {
-                    // Determine from DOM
-                    currentView = interiorView.classList.contains('hidden') ? 'exterior' : 'interior';
-                }
-                history.replaceState(null, '', location.pathname + `#${currentView}-${partId}`);
-                // Switch tab if necessary
-                if (currentView === 'interior') {
-                    showInteriorView();
-                } else {
-                    showExteriorView();
-                }
                 showModal();
             }
-            document.querySelectorAll('#exterior-view .car-part').forEach(part => {
-                part.addEventListener('click', () => openPartModal(part, 'exterior'));
-                part.addEventListener('keydown', e => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openPartModal(part, 'exterior');
-                    }
-                });
-            });
-            document.querySelectorAll('#interior-view .car-part').forEach(part => {
-                part.addEventListener('click', () => openPartModal(part, 'interior'));
-                part.addEventListener('keydown', e => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openPartModal(part, 'interior');
-                    }
-                });
-            });
             closeModal.addEventListener('click', hideModal);
             closeModal.addEventListener('keydown', e => {
                 if (e.key === 'Enter' || e.key === ' ') hideModal();
@@ -551,47 +567,6 @@
                 parts.forEach((part, index) => {
                     setTimeout(() => { part.style.opacity = '1'; }, index * 100);
                 });
-
-                // Hash navigation: open modal if #exterior-part or #interior-part in URL
-                if (location.hash) {
-                    const hash = location.hash.replace('#', '');
-                    const match = /^(exterior|interior)-(.+)$/.exec(hash);
-                    if (match) {
-                        const [ , view, partId ] = match;
-                        // Switch to correct tab first
-                        if (view === 'interior') showInteriorView();
-                        else showExteriorView();
-                        if (partsData[partId]) {
-                            openPartModal(partId, view);
-                        }
-                    } else if (hash === 'interior') {
-                        showInteriorView();
-                    } else if (hash === 'exterior') {
-                        showExteriorView();
-                    }
-                }
-            });
-
-            // Also handle hash changes (if user clicks back/forward)
-            window.addEventListener('hashchange', () => {
-                if (location.hash) {
-                    const hash = location.hash.replace('#', '');
-                    const match = /^(exterior|interior)-(.+)$/.exec(hash);
-                    if (match) {
-                        const [ , view, partId ] = match;
-                        if (partsData[partId]) {
-                            openPartModal(partId, view);
-                        }
-                    } else if (hash === 'interior') {
-                        showInteriorView();
-                    } else if (hash === 'exterior') {
-                        showExteriorView();
-                    } else {
-                        hideModal();
-                    }
-                } else {
-                    hideModal();
-                }
             });
         </script>
     </div>
