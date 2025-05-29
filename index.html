@@ -223,33 +223,45 @@
             document.getElementById('part-modal').addEventListener('click', e => {
                 if (e.target === document.getElementById('part-modal')) hideCarPartModal();
             });
+            // Replace your wheelHotspotData array and createWheelHotspots() call with the following
             const wheelHotspotData = [
-                { label: "Screen", x: 958, y: 352, title: "Central Display Screen", desc: "Shows lap times, deltas, fuel, tire wear, engine mode, DRS, speed, gear, and warnings for both driver and engineer." },
-                { label: "BB", x: 730, y: 390, title: "Left Rotary Encoder (Brake Bias)", desc: "Yellow/Black knob. Adjusts braking force split front/rear for stability and stopping performance." },
-                { label: "DIF", x: 958, y: 390, title: "Middle Rotary Encoder (Differential)", desc: "Aqua/Black knob. Tunes on-throttle diff settings to optimize traction and cornering." },
-                { label: "ENG", x: 1190, y: 390, title: "Right Rotary Encoder (Engine/ERS Mode)", desc: "Orange/Black knob. Controls ERS deployment/harvest, engine mapping, or fuel mix for power and energy strategy." },
-                { label: "L Scroll", x: 735, y: 300, title: "Left Scroll Wheel", desc: "Menu navigation or data selection for the display screen. Used to select and adjust values on the display." },
-                { label: "R Scroll", x: 1180, y: 300, title: "Right Scroll Wheel", desc: "Menu navigation or data selection for the display screen. Used to select and adjust values on the display." },
-                { label: "Center Select", x: 958, y: 480, title: "Menu Confirm/OK", desc: "Confirms menu selections and settings on the screen." },
-                { label: "N", x: 343, y: 144, title: "N (Neutral) Button", desc: "Shifts the gearbox into neutral. Essential for pits and emergencies." },
-                { label: "MARK", x: 570, y: 480, title: "MARK Button", desc: "Marks a lap/time/event for later engineering analysis." },
-                { label: "HSP", x: 470, y: 540, title: "HSP (Hybrid Strategy Protocol)", desc: "Activates a pre-defined hybrid deployment setting for overtaking or energy saving." },
-                { label: "BB-", x: 529, y: 720, title: "BB- (Brake Bias Decrement)", desc: "Reduces brake bias (moves braking rearward) to help with rear locking." },
-                { label: "PIT", x: 520, y: 780, title: "PIT Limiter", desc: "Activates pit lane speed limiter." },
-                { label: "DRS", x: 600, y: 780, title: "DRS Activation", desc: "Activates Drag Reduction System (DRS) when available." },
-                { label: "TALK", x: 1362, y: 608, title: "Radio (Talk) Button", desc: "Activates driver radio to communicate with the pit wall." },
-                { label: "ACS", x: 1347, y: 488, title: "ACS Button", desc: "Quick engine/hybrid adjustment access." },
-                { label: "MID", x: 1640, y: 230, title: "MID Button", desc: "Menu navigation or quick mode selection." },
-                { label: "HIP", x: 1430, y: 600, title: "HIP (Hybrid Intuitive Protocol)", desc: "Instant hybrid deployment for overtaking or defending." },
-                { label: "BB+", x: 1377, y: 723, title: "BB+ (Brake Bias Increment)", desc: "Increases brake bias (moves braking forward) to help with front locking." },
-                { label: "P1", x: 1550, y: 780, title: "P1 Button", desc: "Activates a pre-programmed driver preset (often for race start or safety car)." },
-                { label: "Strat", x: 958, y: 800, title: "Strat (Strategy) Button", desc: "Accesses quick race strategy presets." },
-                { label: "OK", x: 958, y: 870, title: "OK/Confirm Button", desc: "Confirms settings selections." },
-                { label: "Build", x: 1150, y: 870, title: "Build/Unlock Button", desc: "Used for system unlocks or software upgrades (usually garage only)." },
-                { label: "Multi Switch", x: 1230, y: 430, title: "Multi-Position Rotary Switch", desc: "Selects which data or settings are shown on the central display." },
-                { label: "L Paddle", x: 433, y: 387, title: "Left Paddle", desc: "Gear shift, clutch, or DRS. Used for launches and gear changes." },
-                { label: "R Paddle", x: 1488, y: 387, title: "Right Paddle", desc: "Gear shift, clutch, or DRS. Used for launches and gear changes." }
+                // --- Central Area / Around Screen ---
+                { label: "Screen", x: 957, y: 314, title: "Central Display Screen", desc: "Shows lap times, deltas, fuel, tire wear, engine mode, DRS, speed, gear, and warnings for both driver and engineer." },
+                { label: "BB", x: 797, y: 429, title: "Left Rotary Encoder (Brake Bias)", desc: "Yellow/Black knob. Adjusts braking force split front/rear for stability and stopping performance." },
+                { label: "DIF", x: 957, y: 434, title: "Middle Rotary Encoder (Differential)", desc: "Aqua/Black knob. Tunes on-throttle diff settings to optimize traction and cornering." },
+                { label: "ENG", x: 1120, y: 429, title: "Right Rotary Encoder (Engine/ERS Mode)", desc: "Orange/Black knob. Controls ERS deployment/harvest, engine mapping, or fuel mix for power and energy strategy." },
+                { label: "L Scroll", x: 797, y: 361, title: "Left Scroll Wheel", desc: "Menu navigation or data selection for the display screen. Used to select and adjust values on the display." },
+                { label: "R Scroll", x: 1118, y: 361, title: "Right Scroll Wheel", desc: "Menu navigation or data selection for the display screen. Used to select and adjust values on the display." },
+                { label: "Center Select", x: 957, y: 525, title: "Menu Confirm/OK", desc: "Confirms menu selections and settings on the screen." },
+            
+                // --- Left Grip ---
+                { label: "N", x: 410, y: 212, title: "N (Neutral) Button", desc: "Shifts the gearbox into neutral. Essential for pits and emergencies." },
+                { label: "MARK", x: 603, y: 517, title: "MARK Button", desc: "Marks a lap/time/event for later engineering analysis." },
+                { label: "HSP", x: 515, y: 580, title: "HSP (Hybrid Strategy Protocol)", desc: "Activates a pre-defined hybrid deployment setting for overtaking or energy saving." },
+                { label: "BB-", x: 592, y: 768, title: "BB- (Brake Bias Decrement)", desc: "Reduces brake bias (moves braking rearward) to help with rear locking." },
+                { label: "PIT", x: 530, y: 846, title: "PIT Limiter", desc: "Activates pit lane speed limiter." },
+                { label: "DRS", x: 687, y: 846, title: "DRS Activation", desc: "Activates Drag Reduction System (DRS) when available." },
+            
+                // --- Right Grip ---
+                { label: "TALK", x: 1483, y: 641, title: "Radio (Talk) Button", desc: "Activates driver radio to communicate with the pit wall." },
+                { label: "ACS", x: 1353, y: 525, title: "ACS Button", desc: "Quick engine/hybrid adjustment access." },
+                { label: "MID", x: 1660, y: 284, title: "MID Button", desc: "Menu navigation or quick mode selection." },
+                { label: "HIP", x: 1415, y: 659, title: "HIP (Hybrid Intuitive Protocol)", desc: "Instant hybrid deployment for overtaking or defending." },
+                { label: "BB+", x: 1357, y: 776, title: "BB+ (Brake Bias Increment)", desc: "Increases brake bias (moves braking forward) to help with front locking." },
+                { label: "P1", x: 1448, y: 846, title: "P1 Button", desc: "Activates a pre-programmed driver preset (often for race start or safety car)." },
+            
+                // --- Strategy, OK, Build, MultiSwitch, Paddles, LEDs ---
+                { label: "Strat", x: 957, y: 863, title: "Strat (Strategy) Button", desc: "Accesses quick race strategy presets." },
+                { label: "OK", x: 957, y: 950, title: "OK/Confirm Button", desc: "Confirms settings selections." },
+                { label: "Build", x: 1115, y: 950, title: "Build/Unlock Button", desc: "Used for system unlocks or software upgrades (usually garage only)." },
+                { label: "Multi Switch", x: 1200, y: 470, title: "Multi-Position Rotary Switch", desc: "Selects which data or settings are shown on the central display." },
+                { label: "L Paddle", x: 628, y: 420, title: "Left Paddle", desc: "Gear shift, clutch, or DRS. Used for launches and gear changes." },
+                { label: "R Paddle", x: 1285, y: 420, title: "Right Paddle", desc: "Gear shift, clutch, or DRS. Used for launches and gear changes." },
+                { label: "LEDs", x: 1257, y: 260, title: "Shift Light Strip", desc: "Colored LEDs indicate optimal shift points and/or warnings (blue/yellow/red)." },
+                { label: "LED Strip", x: 957, y: 170, title: "Main LED Strip", desc: "Main shift lights and warning indicators." }
             ];
+            
+            // (rest of your code unchanged)
             function createWheelHotspots() {
                 const wheelView = document.getElementById('wheel-view');
                 wheelHotspotData.forEach(h => {
