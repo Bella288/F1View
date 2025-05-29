@@ -31,6 +31,17 @@
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: #101010;
+        }
+        .car-container img {
+            position: absolute;
+            left: 0; top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
         }
         .car-part {
             position: absolute;
@@ -44,6 +55,7 @@
             border: 2px solid white;
             box-sizing: border-box;
             outline: none;
+            transform: translate(-50%, -50%);
         }
         .car-part:focus {
             outline: 3px solid #e10600;
@@ -53,7 +65,7 @@
             background: rgba(225,6,0,0.34);
         }
         .car-part:hover {
-            transform: scale(1.05);
+            transform: translate(-50%, -50%) scale(1.05);
             filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
         }
         .part-tooltip {
@@ -68,6 +80,8 @@
             opacity: 0;
             transition: opacity 0.3s;
             white-space: nowrap;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .car-part:hover .part-tooltip,
         .car-part:focus .part-tooltip {
@@ -76,8 +90,7 @@
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
@@ -301,60 +314,57 @@
                 </button>
             </div>
         </div>
-        <!-- EXTERIOR VIEW -->
         <div id="exterior-view" class="car-container">
-            <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_EXTERIOR.jpg" alt="F1 Car" class="w-full">
+            <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_EXTERIOR.jpg" alt="F1 Car">
             <div class="car-part" style="left:90.63%; top:58.15%;" data-part="front-wing" aria-label="Front Wing" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Front Wing</div>
+                <div class="part-tooltip" style="top:-38px;">Front Wing</div>
             </div>
             <div class="car-part" style="left:85.94%; top:53.89%;" data-part="nose" aria-label="Nose" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Nose</div>
+                <div class="part-tooltip" style="top:-38px;">Nose</div>
             </div>
             <div class="car-part" style="left:48.65%; top:52.22%;" data-part="sidepods" aria-label="Sidepods" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Sidepods</div>
+                <div class="part-tooltip" style="top:-38px;">Sidepods</div>
             </div>
             <div class="car-part" style="left:60.63%; top:40.56%;" data-part="halo" aria-label="Halo" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Halo</div>
+                <div class="part-tooltip" style="top:-38px;">Halo</div>
             </div>
             <div class="car-part" style="left:13.75%; top:46.85%;" data-part="rear-wing" aria-label="Rear Wing" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Rear Wing</div>
+                <div class="part-tooltip" style="top:-38px;">Rear Wing</div>
             </div>
             <div class="car-part" style="left:26.04%; top:61.11%;" data-part="diffuser" aria-label="Diffuser" tabindex="0">
-                <div class="part-tooltip" style="top:40px; left:50%; transform:translateX(-50%);">Diffuser</div>
+                <div class="part-tooltip" style="top:46px;">Diffuser</div>
             </div>
             <div class="car-part" style="left:78.96%; top:56.30%;" data-part="wheels" aria-label="Wheels" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
+                <div class="part-tooltip" style="top:-38px;">Wheels</div>
             </div>
             <div class="car-part" style="left:16.15%; top:38.33%;" data-part="drs" aria-label="DRS" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">DRS</div>
+                <div class="part-tooltip" style="top:-38px;">DRS</div>
             </div>
             <div class="car-part" style="left:19.79%; top:55.74%;" data-part="wheels" aria-label="Wheels" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
+                <div class="part-tooltip" style="top:-38px;">Wheels</div>
             </div>
         </div>
-        <!-- INTERIOR VIEW -->
         <div id="interior-view" class="car-container hidden">
-            <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_INTERIOR.jpg" alt="F1 Car Interior" class="w-full">
+            <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_INTERIOR.jpg" alt="F1 Car Interior">
             <div class="car-part" style="left:54.38%; top:69.39%;" data-part="steering-wheel" aria-label="Steering Wheel" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Steering Wheel</div>
+                <div class="part-tooltip" style="top:-38px;">Steering Wheel</div>
             </div>
             <div class="car-part" style="left:53.44%; top:78.54%;" data-part="pedals" aria-label="Pedals" tabindex="0">
-                <div class="part-tooltip" style="top:40px; left:50%; transform:translateX(-50%);">Pedals</div>
+                <div class="part-tooltip" style="top:46px;">Pedals</div>
             </div>
             <div class="car-part" style="left:53.50%; top:90.41%;" data-part="seat" aria-label="Seat" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Seat</div>
+                <div class="part-tooltip" style="top:-38px;">Seat</div>
             </div>
             <div class="car-part" style="left:54.38%; top:49.70%;" data-part="halo-interior" aria-label="Halo (Interior)" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Halo</div>
+                <div class="part-tooltip" style="top:-38px;">Halo</div>
             </div>
             <div class="car-part" style="left:22.94%; top:48.54%;" data-part="wheels" aria-label="Wheels" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
+                <div class="part-tooltip" style="top:-38px;">Wheels</div>
             </div>
             <div class="car-part" style="left:76.75%; top:44.67%;" data-part="wheels" aria-label="Wheels" tabindex="0">
-                <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
+                <div class="part-tooltip" style="top:-38px;">Wheels</div>
             </div>
         </div>
-        <!-- STEERING WHEEL TAB -->
         <div id="wheel-view" class="wheel-container hidden" style="position:relative;width:960px;height:540px;max-width:100vw; margin:0 auto;">
             <img src="https://raw.githubusercontent.com/Bella288/F1View/refs/heads/main/images/parts/interior/steer.webp" class="w-full" alt="F1 Steering Wheel" draggable="false" style="user-select:none;">
         </div>
@@ -511,7 +521,7 @@
                 const partsData = {
                     'front-wing': {
                         name: 'Front Wing',
-                        description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple carbon fiber elements and can be changed for different tracks.',
+                        description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple carbon fiber elements and is one of the most complex pieces on the car.',
                         fact: 'Front wings can generate up to 25% of the car\'s total downforce.'
                     },
                     'nose': {
@@ -541,7 +551,7 @@
                     },
                     'wheels': {
                         name: 'Wheels',
-                        description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry conditions or treaded for wet.',
+                        description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry conditions and grooved for wet.',
                         fact: 'F1 tires can reach temperatures of 130°C (266°F) during racing.'
                     },
                     'drs': {
@@ -551,7 +561,7 @@
                     },
                     'steering-wheel': {
                         name: 'Steering Wheel',
-                        description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use the wheel to change engine modes, adjust brake balance, control ERS, radio, and much more.',
+                        description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use the wheel to change engine modes, adjust brake balance, and communicate with the team.',
                         fact: 'F1 steering wheels can weigh as little as 1.3 kg and take over 100 hours to design and build.'
                     },
                     'pedals': {
@@ -604,7 +614,7 @@
                 partDescription.textContent = partData.description;
                 partFacts.classList.toggle('hidden', !partData.fact);
                 factText.textContent = partData.fact || '';
-                partImage.innerHTML = partImages[partId] ? `<img src="${partImages[partId]}" alt="${partData.name}" class="rounded-lg shadow mb-2" style="max-width: 100%; max-height:140px; display:block; margin:auto;">` : '';
+                partImage.innerHTML = partImages[partId] ? `<img src="${partImages[partId]}" alt="${partData.name}" class="rounded-lg shadow mb-2" style="max-width: 100%; max-height:140px; display:block;margin:0 auto;">` : '';
                 partLearnMore.innerHTML = partLinks[partId] ? `<a href="${partLinks[partId]}" class="text-blue-400 underline" target="_blank" rel="noopener"${partId==='steering-wheel'?' id="open-steering-interactive"':''}>Learn more</a>` : '';
                 showModal();
             }
@@ -638,7 +648,7 @@
                 {label:"Leds",x:619,y:232,title:"Shift Light Strip",desc:"Colored LEDs indicate optimal shift points and/or warnings (blue/yellow/red)."},
                 {label:"Screen",x:947,y:352,title:"Main Display",desc:"Shows key data: gear, speed, delta, ERS, settings, alarms."},
                 {label:"STRAT",x:728,y:698,title:"Strat Mode Rotary",desc:"Selects engine/PU strategy modes (performance mapping, fuel, reliability)."},
-                {label:"Settings",x:952,y:697,title:"Multi-Function Rotary",desc:"Adjusts various advanced car systems: DEF, BITE, EXIT, INIT, RADIO, TRQ, CRUZ, VOL, REVS, DASH, DISP, BRIG, IC, WET."},
+                {label:"Settings",x:952,y:697,title:"Multi-Function Rotary",desc:"Adjusts various advanced car systems: DEF, BITE, EXIT, INIT, RADIO, TRQ, CRUZ, VOL, REVS, DASH, DISP, BRIG, IC, WU, etc."},
                 {label:"HPP",x:1183,y:703,title:"HPP Mode Rotary",desc:"Likely adjusts power unit parameters (Hybrid Power Parameters), e.g., ERS deployment, harvesting, shift, etc."},
                 {label:"PL",x:1582,y:126,title:"PL (Pit Lane) Button",desc:"Activates pit lane speed limiter."},
                 {label:"+1",x:1486,y:146,title:"+1 Button",desc:"Increases selected parameter by 1 unit."},
