@@ -204,14 +204,81 @@
                 font-size: 11px;
             }
         }
+        .wheel-container {
+            position: relative;
+            width: 960px;
+            height: 540px;
+            max-width: 100vw;
+            margin: 0 auto;
+        }
+        .wheel-hotspot {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            background: rgba(0,123,255,0.13);
+            border: 2px solid #e10600;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 20;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 0 0 1px #fff4;
+        }
+        .wheel-hotspot:hover {
+            background: rgba(0,123,255,0.35);
+            transform: scale(1.1);
+            box-shadow: 0 0 12px #e10600;
+        }
+        .wheel-tooltip {
+            position: absolute;
+            left: 50%; top: -38px;
+            transform: translateX(-50%);
+            font-size: 14px;
+            padding: 4px 10px;
+            background: var(--tooltip-bg);
+            color: #fff;
+            border-radius: 6px;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .wheel-hotspot:hover .wheel-tooltip {
+            opacity: 1;
+        }
+        .wheel-modal-bg {
+            display: none;
+            position: fixed; left:0;top:0;width:100vw;height:100vh;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .wheel-modal-bg.show { display: flex; }
+        .wheel-modal {
+            background: var(--modal-bg);
+            color: var(--primary-text);
+            border-radius: 14px;
+            padding: 30px 28px 20px 28px;
+            min-width: 260px;
+            max-width: 90vw;
+            border: 2px solid #e10600;
+            box-shadow: 0 8px 32px #000b;
+            position: relative;
+        }
+        .wheel-modal-close {
+            position: absolute; top: 10px; right: 16px;
+            font-size: 27px; color: #e10600; cursor: pointer;
+        }
+        @media (max-width: 800px) {
+            .wheel-container { width: 100vw !important; max-width: none !important; }
+        }
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Dark Mode Toggle -->
     <button class="darkmode-toggle" id="darkmode-toggle" aria-label="Toggle dark mode" tabindex="0">
         <span id="darkmode-icon" aria-hidden="true"><i class="fas fa-moon"></i></span>
     </button>
-    <!-- About Me Button & Tooltip -->
     <button class="about-btn" id="about-btn" aria-label="About the creator" tabindex="0">
         <img src="https://github.com/Bella288/F1View/raw/main/images/about_ico.png" alt="About Me">
     </button>
@@ -226,47 +293,41 @@
                 <button id="exterior-btn" class="tab-button px-4 py-2 text-sm font-medium rounded-l-lg bg-gray-800 hover:bg-gray-700 active" aria-label="Show Exterior View" tabindex="0">
                     <i class="fas fa-car mr-2" aria-hidden="true"></i>Exterior
                 </button>
-                <button id="interior-btn" class="tab-button px-4 py-2 text-sm font-medium rounded-r-lg bg-gray-800 hover:bg-gray-700" aria-label="Show Interior View" tabindex="0">
+                <button id="interior-btn" class="tab-button px-4 py-2 text-sm font-medium bg-gray-800 hover:bg-gray-700" aria-label="Show Interior View" tabindex="0">
                     <i class="fas fa-tachometer-alt mr-2" aria-hidden="true"></i>Interior
+                </button>
+                <button id="wheel-btn" class="tab-button px-4 py-2 text-sm font-medium rounded-r-lg bg-gray-800 hover:bg-gray-700" aria-label="Show Steering Wheel" tabindex="0">
+                    <i class="fas fa-circle-notch mr-2" aria-hidden="true"></i>Steering Wheel
                 </button>
             </div>
         </div>
         <!-- EXTERIOR VIEW -->
         <div id="exterior-view" class="car-container">
             <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_EXTERIOR.jpg" alt="F1 Car" class="w-full">
-            <!-- Front Wing -->
             <div class="car-part" style="left:90.63%; top:58.15%;" data-part="front-wing" aria-label="Front Wing" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Front Wing</div>
             </div>
-            <!-- Nose -->
             <div class="car-part" style="left:85.94%; top:53.89%;" data-part="nose" aria-label="Nose" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Nose</div>
             </div>
-            <!-- Sidepods -->
             <div class="car-part" style="left:48.65%; top:52.22%;" data-part="sidepods" aria-label="Sidepods" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Sidepods</div>
             </div>
-            <!-- Halo -->
             <div class="car-part" style="left:60.63%; top:40.56%;" data-part="halo" aria-label="Halo" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Halo</div>
             </div>
-            <!-- Rear Wing -->
             <div class="car-part" style="left:13.75%; top:46.85%;" data-part="rear-wing" aria-label="Rear Wing" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Rear Wing</div>
             </div>
-            <!-- Diffuser -->
             <div class="car-part" style="left:26.04%; top:61.11%;" data-part="diffuser" aria-label="Diffuser" tabindex="0">
                 <div class="part-tooltip" style="top:40px; left:50%; transform:translateX(-50%);">Diffuser</div>
             </div>
-            <!-- Wheels -->
             <div class="car-part" style="left:78.96%; top:56.30%;" data-part="wheels" aria-label="Wheels" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
             </div>
-            <!-- DRS -->
             <div class="car-part" style="left:16.15%; top:38.33%;" data-part="drs" aria-label="DRS" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">DRS</div>
             </div>
-            <!-- Corrected: New Wheel Click Area at (190,301) for 960x540 -->
             <div class="car-part" style="left:19.79%; top:55.74%;" data-part="wheels" aria-label="Wheels" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
             </div>
@@ -274,32 +335,36 @@
         <!-- INTERIOR VIEW -->
         <div id="interior-view" class="car-container hidden">
             <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_INTERIOR.jpg" alt="F1 Car Interior" class="w-full">
-            <!-- Steering Wheel -->
             <div class="car-part" style="left:54.38%; top:69.39%;" data-part="steering-wheel" aria-label="Steering Wheel" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Steering Wheel</div>
             </div>
-            <!-- Pedals -->
             <div class="car-part" style="left:53.44%; top:78.54%;" data-part="pedals" aria-label="Pedals" tabindex="0">
                 <div class="part-tooltip" style="top:40px; left:50%; transform:translateX(-50%);">Pedals</div>
             </div>
-            <!-- Seat -->
             <div class="car-part" style="left:53.50%; top:90.41%;" data-part="seat" aria-label="Seat" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Seat</div>
             </div>
-            <!-- Halo -->
             <div class="car-part" style="left:54.38%; top:49.70%;" data-part="halo-interior" aria-label="Halo (Interior)" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Halo</div>
             </div>
-            <!-- Corrected: Left Wheel Click Area at (367,549) for 1600x1131 -->
             <div class="car-part" style="left:22.94%; top:48.54%;" data-part="wheels" aria-label="Wheels" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
             </div>
-            <!-- Corrected: Right Wheel Click Area at (1228,505) for 1600x1131 -->
             <div class="car-part" style="left:76.75%; top:44.67%;" data-part="wheels" aria-label="Wheels" tabindex="0">
                 <div class="part-tooltip" style="top:-30px; left:50%; transform:translateX(-50%);">Wheels</div>
             </div>
         </div>
-
+        <!-- STEERING WHEEL TAB -->
+        <div id="wheel-view" class="wheel-container hidden" style="position:relative;width:960px;height:540px;max-width:100vw; margin:0 auto;">
+            <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/interior/steer.webp" class="w-full" alt="F1 Steering Wheel" draggable="false" style="user-select:none;">
+        </div>
+        <div class="wheel-modal-bg" id="wheel-modal-bg">
+            <div class="wheel-modal" id="wheel-modal">
+                <span class="wheel-modal-close" id="wheel-modal-close" tabindex="0">&times;</span>
+                <h2 id="wheel-modal-title" class="text-xl font-bold mb-2 text-red-600"></h2>
+                <p id="wheel-modal-desc" class="mb-2"></p>
+            </div>
+        </div>
         <div id="part-modal" class="modal" aria-modal="true" role="dialog">
             <div class="modal-content">
                 <span class="close-modal" aria-label="Close part modal" tabindex="0">&times;</span>
@@ -353,11 +418,9 @@
                 const theme = localStorage.getItem('theme');
                 if (theme) setDarkMode(theme === 'dark');
             })();
-
             // About modal logic
             const aboutBtn = document.getElementById('about-btn');
             const aboutModal = document.getElementById('about-modal');
-            const aboutTooltip = document.getElementById('about-tooltip');
             function openAbout() {
                 aboutModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
@@ -382,121 +445,38 @@
             aboutModal.addEventListener('click', e => {
                 if (e.target === aboutModal) closeAbout();
             });
-
-            // Part images and links
-            const partImages = {
-                // --- EXTERIOR ---
-                'front-wing': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/front_wing.webp',
-                'nose': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/nose.jpg',
-                'sidepods': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.jpg',
-                'halo': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/halo.jpg',
-                'rear-wing': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/rear_wing.jpg',
-                'diffuser': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.jpg',
-                'wheels': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/tyre.jpg',
-                'drs': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/drs.gif',
-                // --- INTERIOR ---
-                'steering-wheel': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/steer.jpg',
-                'pedals': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/pedals.jpg',
-                'seat': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/seat.png',
-                'halo-interior': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/halo.png'
-            };
-            const partLinks = {
-                'front-wing': 'https://en.wikipedia.org/wiki/Wing_(automobile)#Front_wing',
-                'nose': 'https://en.wikipedia.org/wiki/Formula_One_car#Nose_cone',
-                'sidepods': 'https://en.wikipedia.org/wiki/Sidepod',
-                'halo': 'https://en.wikipedia.org/wiki/Halo_(safety_device)',
-                'rear-wing': 'https://en.wikipedia.org/wiki/Wing_(automobile)#Rear_wing',
-                'diffuser': 'https://en.wikipedia.org/wiki/Diffuser_(automotive)',
-                'wheels': 'https://en.wikipedia.org/wiki/Wheel#Automotive_wheels',
-                'drs': 'https://en.wikipedia.org/wiki/Drag_reduction_system',
-                'steering-wheel': 'https://en.wikipedia.org/wiki/Steering_wheel#Formula_One',
-                'pedals': 'https://en.wikipedia.org/wiki/Car_controls#Pedals',
-                'seat': 'https://en.wikipedia.org/wiki/Racing_seat',
-                'halo-interior': 'https://en.wikipedia.org/wiki/Halo_(safety_device)'
-            };
-            // --- FULL partsData object, all parts filled out, see earlier assistant messages for content ---
-            const partsData = {
-                'front-wing': {
-                    name: 'Front Wing',
-                    description: `The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It's made from multiple carbon fiber elements and endplates, each meticulously shaped to guide air around the tires and into the rest of the car’s bodywork. Adjustments to the front wing can change the car’s balance and grip, and teams bring different designs to suit each circuit's demands. A damaged front wing can severely impact lap times due to lost downforce and disturbed airflow.`,
-                    fact: `Front wings can generate up to 25% of the car's total downforce, and each design is optimized for a specific track. They are often replaced in seconds during pit stops, and can cost over $100,000 each.`
-                },
-                'nose': {
-                    name: 'Nose Cone',
-                    description: `The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible. The design influences airflow beneath the car and toward the bargeboards and floor. Modern F1 noses are narrow and high to maximize airflow, and their structure is critical for both performance and driver safety.`,
-                    fact: `The nose must withstand an impact of 15kN (about 1.5 tons) without failing safety tests. Teams often redesign noses mid-season to optimize airflow and meet new regulations.`
-                },
-                'sidepods': {
-                    name: 'Sidepods',
-                    description: `Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently, reducing drag and increasing cooling. The shape of the sidepods is a key area of innovation, with teams experimenting with “in-wash” and “downwash” concepts to manipulate airflow to the rear of the car. Effective cooling is vital, as power units and batteries operate at high thermal loads throughout a race.`,
-                    fact: `Temperatures inside sidepods can reach up to 120°C (248°F) during a race. Teams use complex airflow simulations (CFD) to design them for maximum cooling and minimum drag.`
-                },
-                'halo': {
-                    name: 'Halo Safety Device',
-                    description: `The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars. It can withstand huge forces and is credited with saving lives in multiple high-profile accidents. Despite initial controversy over aesthetics, drivers quickly adapted, and today it's an integral safety feature. The halo also slightly affects the car’s aerodynamics, so teams design fairings to minimize drag.`,
-                    fact: `The halo weighs about 7 kg but can support loads of up to 12,000 kg—over 1.5 times the weight of a London double-decker bus. Titanium halos are manufactured to strict FIA standards and are replaced after a heavy impact.`
-                },
-                'rear-wing': {
-                    name: 'Rear Wing',
-                    description: `The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering. Its multi-element design and endplates are fine-tuned for each circuit. The main plane and flap can be adjusted, both for maximum downforce and to balance the effects of DRS (Drag Reduction System). The rear wing also helps manage airflow over the car and controls the wake for following cars, making it a focus for both performance and regulatory changes.`,
-                    fact: `At full speed, the rear wing can generate enough downforce to theoretically allow the car to drive upside down. Complex endplate designs help reduce drag and improve straight-line speed.`
-                },
-                'diffuser': {
-                    name: 'Diffuser',
-                    description: `The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce. By accelerating airflow under the car, the diffuser creates a low-pressure zone that pulls the car to the track. Its design is tightly regulated, but teams exploit every millimeter for extra performance. Modern diffusers work with the floor’s venturi tunnels to maximize suction without increasing drag.`,
-                    fact: `A well-designed diffuser can increase total car downforce by up to 40% without adding significant drag. Ground effect is so strong that a sudden loss (e.g., from bottoming out) can cause a car to spin.`
-                },
-                'wheels': {
-                    name: 'Wheels',
-                    description: `F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry conditions and treaded for wet. Each wheel contains a tire pressure monitoring system (TPMS), and wheel guns designed for rapid pit stops can remove and replace them in under two seconds. Brakes, suspension, and airflow are all designed around the wheel’s placement. The wheels must endure extreme lateral forces, temperature swings, and impacts during a race.`,
-                    fact: `F1 tires can reach temperatures of 130°C (266°F) during racing. A full set of wheels and tires costs tens of thousands of dollars, and teams use about 1,600 tires per season.`
-                },
-                'drs': {
-                    name: 'DRS (Drag Reduction System)',
-                    description: `The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing straight-line speed. DRS can only be used in specific zones and under green flag conditions. It’s a strategic tool for overtaking, but must be managed carefully as it reduces rear downforce and stability. DRS has led to more on-track action, but also requires skill to use effectively without losing control.`,
-                    fact: `DRS can increase straight-line speed by 10–15 km/h (6–9 mph) by reducing drag by up to 25%. The system is electronically controlled and monitored by race stewards to ensure compliance.`
-                },
-                'steering-wheel': {
-                    name: 'Steering Wheel',
-                    description: `An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use the wheel to change engine modes, adjust brake bias, activate DRS, make radio calls, and even engage the pit limiter. The display screen shows vital telemetry, lap times, gear selection, and warning messages. Each wheel is custom-fitted and programmed for the individual driver, and its quick-release mechanism is a key safety feature.`,
-                    fact: `F1 steering wheels can weigh as little as 1.3 kg and take over 100 hours to design and build. Some wheels cost over $50,000 and contain more than 200 components.`
-                },
-                'pedals': {
-                    name: 'Pedals',
-                    description: `F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration, while throttle mapping can be adjusted for different power delivery. There is no clutch pedal; instead, drivers use paddles behind the steering wheel for starts. Braking is a complex blend of hydraulic and regenerative systems, especially with hybrid power units.`,
-                    fact: `Brake pedal pressure can exceed 150 kg during heavy braking, with temperatures reaching 1,000°C (1,832°F). Drivers can go from 300 km/h to 50 km/h in less than 2 seconds.`
-                },
-                'seat': {
-                    name: `Driver's Seat`,
-                    description: `The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events. It's made from carbon fiber for strength and lightness, and must be easily removable in an emergency. The seat supports the driver’s body in corners and under braking, and often includes integrated headrests and safety harnesses. Comfort is limited, as a snug fit is essential for both performance and crash safety.`,
-                    fact: `Seats are so tight that drivers often lose 2–3 kg of weight during a race from dehydration. Each seat is unique, and drivers sometimes bring their mold from team to team.`
-                },
-                'halo-interior': {
-                    name: 'Halo (Interior View)',
-                    description: `From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver's field of vision. While it may seem intrusive, drivers adapt quickly and can spot apexes and rivals with minimal distraction. The central pillar is designed to minimize visual obstruction, and teams add padding and aerodynamic fairings for comfort and performance. The halo must be easily detachable for rescue operations.`,
-                    fact: `During development, 90% of drivers said they could spot a Formula 2 car approaching with the Halo fitted. The device has saved lives in several dramatic incidents since its introduction.`
-                }
-            };
-
-            // Tab switching functionality
+            // Tab switching logic (modified to support wheel tab)
             const exteriorBtn = document.getElementById('exterior-btn');
             const interiorBtn = document.getElementById('interior-btn');
+            const wheelBtn = document.getElementById('wheel-btn');
             const exteriorView = document.getElementById('exterior-view');
             const interiorView = document.getElementById('interior-view');
+            const wheelView = document.getElementById('wheel-view');
             exteriorBtn.addEventListener('click', () => {
                 exteriorBtn.classList.add('active');
                 interiorBtn.classList.remove('active');
+                wheelBtn.classList.remove('active');
                 exteriorView.classList.remove('hidden');
                 interiorView.classList.add('hidden');
+                wheelView.classList.add('hidden');
             });
             interiorBtn.addEventListener('click', () => {
                 interiorBtn.classList.add('active');
                 exteriorBtn.classList.remove('active');
-                interiorView.classList.remove('hidden');
+                wheelBtn.classList.remove('active');
                 exteriorView.classList.add('hidden');
+                interiorView.classList.remove('hidden');
+                wheelView.classList.add('hidden');
             });
-
-            // Modal functionality
+            wheelBtn.addEventListener('click', () => {
+                wheelBtn.classList.add('active');
+                exteriorBtn.classList.remove('active');
+                interiorBtn.classList.remove('active');
+                exteriorView.classList.add('hidden');
+                interiorView.classList.add('hidden');
+                wheelView.classList.remove('hidden');
+            });
+            // Modal logic for car parts (unchanged)
             const modal = document.getElementById('part-modal');
             const partName = document.getElementById('part-name');
             const partDescription = document.getElementById('part-description');
@@ -528,26 +508,104 @@
                 });
             });
             function openPartModal(part) {
+                const partsData = {
+                    'front-wing': {
+                        name: 'Front Wing',
+                        description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple carbon fiber elements and can be changed for different tracks.',
+                        fact: 'Front wings can generate up to 25% of the car\'s total downforce.'
+                    },
+                    'nose': {
+                        name: 'Nose Cone',
+                        description: 'The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible.',
+                        fact: 'The nose must withstand an impact of 15kN without failing safety tests.'
+                    },
+                    'sidepods': {
+                        name: 'Sidepods',
+                        description: 'Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently.',
+                        fact: 'Temperatures inside sidepods can reach up to 120°C (248°F) during a race.'
+                    },
+                    'halo': {
+                        name: 'Halo Safety Device',
+                        description: 'The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars.',
+                        fact: 'The halo weighs about 7 kg but can support loads of up to 12,000 kg.'
+                    },
+                    'rear-wing': {
+                        name: 'Rear Wing',
+                        description: 'The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering.',
+                        fact: 'At full speed, the rear wing can generate enough downforce to theoretically allow the car to drive upside down.'
+                    },
+                    'diffuser': {
+                        name: 'Diffuser',
+                        description: 'The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce.',
+                        fact: 'A well-designed diffuser can increase total car downforce by up to 40% without adding significant drag.'
+                    },
+                    'wheels': {
+                        name: 'Wheels',
+                        description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry conditions or treaded for wet.',
+                        fact: 'F1 tires can reach temperatures of 130°C (266°F) during racing.'
+                    },
+                    'drs': {
+                        name: 'DRS (Drag Reduction System)',
+                        description: 'The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing straight-line speed.',
+                        fact: 'DRS can increase straight-line speed by 10–15 km/h (6–9 mph).'
+                    },
+                    'steering-wheel': {
+                        name: 'Steering Wheel',
+                        description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use the wheel to change engine modes, adjust brake balance, control ERS, radio, and much more.',
+                        fact: 'F1 steering wheels can weigh as little as 1.3 kg and take over 100 hours to design and build.'
+                    },
+                    'pedals': {
+                        name: 'Pedals',
+                        description: 'F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration.',
+                        fact: 'Brake pedal pressure can exceed 150 kg during heavy braking.'
+                    },
+                    'seat': {
+                        name: "Driver's Seat",
+                        description: "The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events.",
+                        fact: "Drivers often lose 2–3 kg of weight during a race from dehydration."
+                    },
+                    'halo-interior': {
+                        name: 'Halo (Interior View)',
+                        description: 'From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver\'s field of vision.',
+                        fact: 'The device has saved lives in several dramatic incidents since 2018.'
+                    }
+                };
+                const partImages = {
+                    'front-wing': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/front_wing.webp',
+                    'nose': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/nose.jpg',
+                    'sidepods': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.jpg',
+                    'halo': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/halo.jpg',
+                    'rear-wing': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/rear_wing.jpg',
+                    'diffuser': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.jpg',
+                    'wheels': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/tyre.jpg',
+                    'drs': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/drs.gif',
+                    'steering-wheel': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/interior/steer.webp',
+                    'pedals': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/pedals.jpg',
+                    'seat': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/seat.png',
+                    'halo-interior': 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/halo.png'
+                };
+                const partLinks = {
+                    'front-wing': 'https://en.wikipedia.org/wiki/Wing_(automobile)#Front_wing',
+                    'nose': 'https://en.wikipedia.org/wiki/Formula_One_car#Nose_cone',
+                    'sidepods': 'https://en.wikipedia.org/wiki/Sidepod',
+                    'halo': 'https://en.wikipedia.org/wiki/Halo_(safety_device)',
+                    'rear-wing': 'https://en.wikipedia.org/wiki/Wing_(automobile)#Rear_wing',
+                    'diffuser': 'https://en.wikipedia.org/wiki/Diffuser_(automotive)',
+                    'wheels': 'https://en.wikipedia.org/wiki/Wheel#Automotive_wheels',
+                    'drs': 'https://en.wikipedia.org/wiki/Drag_reduction_system',
+                    'steering-wheel': 'https://en.wikipedia.org/wiki/Steering_wheel#Formula_One',
+                    'pedals': 'https://en.wikipedia.org/wiki/Car_controls#Pedals',
+                    'seat': 'https://en.wikipedia.org/wiki/Racing_seat',
+                    'halo-interior': 'https://en.wikipedia.org/wiki/Halo_(safety_device)'
+                };
                 const partId = part.getAttribute('data-part');
-                const partData = partsData[partId];
+                const partData = partsData[partId] || {name: "Car Part", description: "Details unavailable"};
                 partName.textContent = partData.name;
                 partDescription.textContent = partData.description;
-                if (partImages[partId]) {
-                    partImage.innerHTML = `<img src="${partImages[partId]}" alt="${partData.name}" class="rounded-lg shadow mb-2" style="max-width: 100%; max-height:140px; display:block; margin:auto;">`;
-                } else {
-                    partImage.innerHTML = '';
-                }
-                if (partData.fact) {
-                    factText.textContent = partData.fact;
-                    partFacts.classList.remove('hidden');
-                } else {
-                    partFacts.classList.add('hidden');
-                }
-                if (partLinks[partId]) {
-                    partLearnMore.innerHTML = `<a href="${partLinks[partId]}" class="text-blue-400 underline" target="_blank" rel="noopener">Learn more</a>`;
-                } else {
-                    partLearnMore.innerHTML = '';
-                }
+                partFacts.classList.toggle('hidden', !partData.fact);
+                factText.textContent = partData.fact || '';
+                partImage.innerHTML = partImages[partId] ? `<img src="${partImages[partId]}" alt="${partData.name}" class="rounded-lg shadow mb-2" style="max-width: 100%; max-height:140px; display:block; margin:auto;">` : '';
+                partLearnMore.innerHTML = partLinks[partId] ? `<a href="${partLinks[partId]}" class="text-blue-400 underline" target="_blank" rel="noopener"${partId==='steering-wheel'?' id="open-steering-interactive"':''}>Learn more</a>` : '';
                 showModal();
             }
             closeModal.addEventListener('click', hideModal);
@@ -560,13 +618,85 @@
             modal.addEventListener('click', e => {
                 if (e.target === modal) hideModal();
             });
-
-            // Animate parts on load
             document.addEventListener('DOMContentLoaded', () => {
                 const parts = document.querySelectorAll('.car-part');
                 parts.forEach((part, index) => {
                     setTimeout(() => { part.style.opacity = '1'; }, index * 100);
                 });
+            });
+            // Steering Wheel Hotspots
+            const wheelHotspotData = [
+                {label:"N",x:343,y:144,title:"Neutral (N) Button",desc:"Instantly puts gearbox in Neutral. Used for starts, emergencies, or when stopping the car."},
+                {label:"+10",x:447,y:154,title:"+10 Button",desc:"Increases selected parameter (like brake balance, engine mode) by 10 units."},
+                {label:"BW",x:536,y:212,title:"Brake Magic (BW)",desc:"Reconfigures brake balance for maximum front bias to heat brakes or for safety car restarts. (Famously mis-pressed by Hamilton in Baku 2021)"},
+                {label:"Entry",x:273,y:230,title:"'Entry' Rotary",desc:"Multi-function rotary usually for corner entry settings (diff, brake migration, etc)."},
+                {label:"EB",x:508,y:360,title:"Engine Braking (EB) Rotary",desc:"Adjusts the engine braking level, affecting how much the engine slows the car off-throttle."},
+                {label:"Scroll",x:444,y:535,title:"Unknown Left Scroll Wheel",desc:"Likely for menu navigation or fine-tuning settings."},
+                {label:"MARK",x:570,y:480,title:"Mark Button",desc:"Used to mark/log an event in the telemetry for later engineering analysis."},
+                {label:"OK",x:554,y:600,title:"OK Button",desc:"Confirms menu choices or acknowledges messages on the dash."},
+                {label:"BB-",x:529,y:720,title:"Brake Balance Minus (BB-)",desc:"Decreases rearward brake bias. Used to tune the car under braking."},
+                {label:"Leds",x:619,y:232,title:"Shift Light Strip",desc:"Colored LEDs indicate optimal shift points and/or warnings (blue/yellow/red)."},
+                {label:"Screen",x:947,y:352,title:"Main Display",desc:"Shows key data: gear, speed, delta, ERS, settings, alarms."},
+                {label:"STRAT",x:728,y:698,title:"Strat Mode Rotary",desc:"Selects engine/PU strategy modes (performance mapping, fuel, reliability)."},
+                {label:"Settings",x:952,y:697,title:"Multi-Function Rotary",desc:"Adjusts various advanced car systems: DEF, BITE, EXIT, INIT, RADIO, TRQ, CRUZ, VOL, REVS, DASH, DISP, BRIG, IC, WET."},
+                {label:"HPP",x:1183,y:703,title:"HPP Mode Rotary",desc:"Likely adjusts power unit parameters (Hybrid Power Parameters), e.g., ERS deployment, harvesting, shift, etc."},
+                {label:"PL",x:1582,y:126,title:"PL (Pit Lane) Button",desc:"Activates pit lane speed limiter."},
+                {label:"+1",x:1486,y:146,title:"+1 Button",desc:"Increases selected parameter by 1 unit."},
+                {label:"PC",x:1383,y:212,title:"PC (Pit Confirm) Button",desc:"Confirms pit instruction, or used for pit related settings."},
+                {label:"MID",x:1640,y:230,title:"MID Rotary",desc:"Likely for mid-corner balance or mid-race settings."},
+                {label:"BBAL",x:1400,y:357,title:"BBAL Rotary",desc:"Selects brake balance preset profiles (BB+, BB-, etc)."},
+                {label:"ACS",x:1347,y:488,title:"ACS Button",desc:"Team-specific; often for 'Anti-Cheat' or 'Automatic Clutch System'."},
+                {label:"Scroll",x:1457,y:532,title:"Unknown Right Scroll Wheel",desc:"Likely for menu navigation or fine-tuning settings."},
+                {label:"TALK",x:1362,y:608,title:"Radio (Talk) Button",desc:"Push-to-talk: communicates with the pit wall."},
+                {label:"BB+",x:1377,y:723,title:"Brake Balance Plus (BB+)",desc:"Increases rearward brake bias."},
+                {label:"L Paddle",x:433,y:387,title:"Left Paddle",desc:"Gear up/down, clutch or DRS. (F1 wheels have dual clutches on both paddles for launch control)"},
+                {label:"R Paddle",x:1488,y:387,title:"Right Paddle",desc:"Gear up/down, clutch or DRS. (Typically right is gear up, left is gear down)"},
+                {label:"LEDs",x:1296,y:225,title:"Shift Light Strip",desc:"Colored LEDs indicate optimal shift points and/or warnings (blue/yellow/red)."},
+                {label:"LED Strip",x:958,y:119,title:"Main LED Strip",desc:"Main shift lights and warning indicators."}
+            ];
+            const wheelScale = 0.5;
+            function createWheelHotspots() {
+                const wheelView = document.getElementById('wheel-view');
+                wheelHotspotData.forEach(h => {
+                    const spot = document.createElement('div');
+                    spot.className = 'wheel-hotspot';
+                    spot.style.left = (h.x * wheelScale) + 'px';
+                    spot.style.top = (h.y * wheelScale) + 'px';
+                    spot.tabIndex = 0;
+                    spot.setAttribute('aria-label', h.title);
+                    const tip = document.createElement('div');
+                    tip.className = 'wheel-tooltip';
+                    tip.textContent = h.title;
+                    spot.appendChild(tip);
+                    spot.addEventListener('click', () => showWheelModal(h.title, h.desc));
+                    spot.addEventListener('keydown', e => {
+                        if (e.key === 'Enter' || e.key === ' ') showWheelModal(h.title, h.desc);
+                    });
+                    wheelView.appendChild(spot);
+                });
+            }
+            function showWheelModal(title, desc) {
+                document.getElementById('wheel-modal-title').textContent = title;
+                document.getElementById('wheel-modal-desc').textContent = desc;
+                document.getElementById('wheel-modal-bg').classList.add('show');
+            }
+            function closeWheelModal() {
+                document.getElementById('wheel-modal-bg').classList.remove('show');
+            }
+            document.getElementById('wheel-modal-close').onclick = closeWheelModal;
+            document.getElementById('wheel-modal-bg').onclick = function(e) {
+                if(e.target === this) closeWheelModal();
+            };
+            window.addEventListener('keydown', e => {
+                if(e.key === "Escape" && document.getElementById('wheel-modal-bg').classList.contains('show')) closeWheelModal();
+            });
+            createWheelHotspots();
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.id === 'open-steering-interactive') {
+                    e.preventDefault();
+                    wheelBtn.click();
+                    hideModal();
+                }
             });
         </script>
     </div>
