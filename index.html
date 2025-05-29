@@ -8,296 +8,48 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-bg: #18181b;
-            --primary-text: #fff;
-            --modal-bg: #1a1a1a;
-            --modal-border: #e10600;
-            --tooltip-bg: rgba(0, 0, 0, 0.8);
-        }
-        [data-theme="light"] {
-            --primary-bg: #f6f6f6;
-            --primary-text: #18181b;
-            --modal-bg: #fff;
-            --modal-border: #e10600;
-            --tooltip-bg: rgba(60, 60, 60, 0.95);
-        }
-        html, body {
-            background: var(--primary-bg);
-            color: var(--primary-text);
-        }
-        .car-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            aspect-ratio: 16/9;
-            background: #101010;
-        }
-        .car-container img {
-            position: absolute;
-            left: 0; top: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
-            user-select: none;
-        }
-        .car-part {
-            position: absolute;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(225,6,0,0.18);
-            border: 2px solid white;
-            box-sizing: border-box;
-            outline: none;
-            transform: translate(-50%, -50%);
-        }
-        .car-part:focus {
-            outline: 3px solid #e10600;
-            box-shadow: 0 0 0 3px #fff, 0 0 8px #e10600;
-        }
-        .car-part:active {
-            background: rgba(225,6,0,0.34);
-        }
-        .car-part:hover {
-            transform: translate(-50%, -50%) scale(1.05);
-            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
-        }
-        .part-tooltip {
-            position: absolute;
-            background-color: var(--tooltip-bg);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            pointer-events: none;
-            z-index: 20;
-            opacity: 0;
-            transition: opacity 0.3s;
-            white-space: nowrap;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .car-part:hover .part-tooltip,
-        .car-part:focus .part-tooltip {
-            opacity: 1;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background-color: var(--modal-bg);
-            color: var(--primary-text);
-            border-radius: 10px;
-            width: 95%;
-            max-width: 520px;
-            padding: 20px;
-            position: relative;
-            border: 2px solid var(--modal-border);
-            box-shadow: 0 0 20px rgba(225, 6, 0, 0.5);
-        }
-        .close-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #e10600;
-        }
-        .tab-button {
-            transition: all 0.3s;
-        }
-        .tab-button.active {
-            background-color: #e10600;
-            color: white;
-        }
-        .darkmode-toggle {
-            position: fixed;
-            top: 18px;
-            right: 72px;
-            z-index: 200;
-            background: var(--modal-bg);
-            border: 2px solid var(--modal-border);
-            border-radius: 9999px;
-            padding: 6px 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 18px 0 rgba(0,0,0,0.18);
-            transition: background 0.2s, color 0.2s;
-        }
-        .darkmode-toggle:focus {
-            outline: 2px solid #e10600;
-        }
-        .about-btn {
-            position: fixed;
-            top: 18px;
-            right: 18px;
-            z-index: 201;
-            background: var(--modal-bg);
-            border: 2px solid var(--modal-border);
-            border-radius: 16px;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 0;
-            transition: box-shadow 0.2s;
-        }
-        .about-btn img {
-            width: 22px;
-            height: 22px;
-            pointer-events: none;
-        }
-        .about-btn:focus {
-            outline: 2px solid #e10600;
-            box-shadow: 0 0 0 3px #fff, 0 0 8px #e10600;
-        }
-        .about-tooltip {
-            position: absolute;
-            top: 44px;
-            right: 0;
-            background: var(--tooltip-bg);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
-            z-index: 202;
-        }
-        .about-btn:hover + .about-tooltip,
-        .about-btn:focus + .about-tooltip {
-            opacity: 1;
-        }
+        :root { --primary-bg: #18181b; --primary-text: #fff; --modal-bg: #1a1a1a; --modal-border: #e10600; --tooltip-bg: rgba(0, 0, 0, 0.8);}
+        [data-theme="light"] { --primary-bg: #f6f6f6; --primary-text: #18181b; --modal-bg: #fff; --modal-border: #e10600; --tooltip-bg: rgba(60, 60, 60, 0.95);}
+        html, body { background: var(--primary-bg); color: var(--primary-text);}
+        .car-container { position: relative; width: 100%; max-width: 800px; margin: 0 auto; aspect-ratio: 16/9; background: #101010;}
+        .car-container img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none;}
+        .car-part { position: absolute; cursor: pointer; transition: all 0.3s ease; z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: rgba(225,6,0,0.18); border: 2px solid white; box-sizing: border-box; outline: none; transform: translate(-50%, -50%);}
+        .car-part:focus { outline: 3px solid #e10600; box-shadow: 0 0 0 3px #fff, 0 0 8px #e10600;}
+        .car-part:active { background: rgba(225,6,0,0.34);}
+        .car-part:hover { transform: translate(-50%, -50%) scale(1.05); filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));}
+        .part-tooltip { position: absolute; background-color: var(--tooltip-bg); color: white; padding: 5px 10px; border-radius: 4px; font-size: 12px; pointer-events: none; z-index: 20; opacity: 0; transition: opacity 0.3s; white-space: nowrap; left: 50%; transform: translateX(-50%);}
+        .car-part:hover .part-tooltip, .car-part:focus .part-tooltip { opacity: 1;}
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 100; justify-content: center; align-items: center;}
+        .modal-content { background-color: var(--modal-bg); color: var(--primary-text); border-radius: 10px; width: 95%; max-width: 520px; padding: 20px; position: relative; border: 2px solid var(--modal-border); box-shadow: 0 0 20px rgba(225, 6, 0, 0.5);}
+        .close-modal { position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer; color: #e10600;}
+        .tab-button { transition: all 0.3s;}
+        .tab-button.active { background-color: #e10600; color: white;}
+        .darkmode-toggle { position: fixed; top: 18px; right: 72px; z-index: 200; background: var(--modal-bg); border: 2px solid var(--modal-border); border-radius: 9999px; padding: 6px 12px; cursor: pointer; display: flex; align-items: center; box-shadow: 0 2px 18px 0 rgba(0,0,0,0.18); transition: background 0.2s, color 0.2s;}
+        .darkmode-toggle:focus { outline: 2px solid #e10600;}
+        .about-btn { position: fixed; top: 18px; right: 18px; z-index: 201; background: var(--modal-bg); border: 2px solid var(--modal-border); border-radius: 16px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; transition: box-shadow 0.2s;}
+        .about-btn img { width: 22px; height: 22px; pointer-events: none;}
+        .about-btn:focus { outline: 2px solid #e10600; box-shadow: 0 0 0 3px #fff, 0 0 8px #e10600;}
+        .about-tooltip { position: absolute; top: 44px; right: 0; background: var(--tooltip-bg); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 202;}
+        .about-btn:hover + .about-tooltip, .about-btn:focus + .about-tooltip { opacity: 1;}
         @media (max-width: 640px) {
-            .car-part {
-                width: 30px !important;
-                height: 30px !important;
-            }
-            .part-tooltip {
-                font-size: 10px;
-                padding: 3px 6px;
-            }
-            .darkmode-toggle,
-            .about-btn {
-                top: 10px;
-                right: 12px;
-                padding: 2px 8px;
-            }
-            .about-btn {
-                top: 10px;
-                right: 10px;
-                width: 30px;
-                height: 30px;
-            }
-            .about-btn img {
-                width: 16px;
-                height: 16px;
-            }
-            .about-tooltip {
-                top: 36px;
-                font-size: 11px;
-            }
+            .car-part { width: 30px !important; height: 30px !important;}
+            .part-tooltip { font-size: 10px; padding: 3px 6px;}
+            .darkmode-toggle, .about-btn { top: 10px; right: 12px; padding: 2px 8px;}
+            .about-btn { top: 10px; right: 10px; width: 30px; height: 30px;}
+            .about-btn img { width: 16px; height: 16px;}
+            .about-tooltip { top: 36px; font-size: 11px;}
         }
-        .wheel-container {
-            position: relative;
-            width: 100%;
-            max-width: 960px;
-            margin: 0 auto;
-            aspect-ratio: 16/9;
-            background: #111;
-        }
-        .wheel-container img {
-            position: absolute;
-            left: 0; top: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
-            user-select: none;
-        }
-        .wheel-hotspot {
-            position: absolute;
-            width: 36px;
-            height: 36px;
-            background: rgba(0,123,255,0.13);
-            border: 2px solid #e10600;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 20;
-            transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 0 0 1px #fff4;
-            transform: translate(-50%, -50%);
-        }
-        .wheel-hotspot:hover {
-            background: rgba(0,123,255,0.35);
-            transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 0 0 12px #e10600;
-        }
-        .wheel-tooltip {
-            position: absolute;
-            left: 50%; top: -38px;
-            transform: translateX(-50%);
-            font-size: 14px;
-            padding: 4px 10px;
-            background: var(--tooltip-bg);
-            color: #fff;
-            border-radius: 6px;
-            pointer-events: none;
-            white-space: nowrap;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        .wheel-hotspot:hover .wheel-tooltip,
-        .wheel-hotspot:focus .wheel-tooltip {
-            opacity: 1;
-        }
-        .wheel-modal-bg {
-            display: none;
-            position: fixed; left:0;top:0;width:100vw;height:100vh;
-            background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
+        .wheel-container { position: relative; width: 100%; max-width: 960px; margin: 0 auto; aspect-ratio: 16/9; background: #111;}
+        .wheel-container img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; user-select: none;}
+        .wheel-hotspot { position: absolute; width: 36px; height: 36px; background: rgba(0,123,255,0.13); border: 2px solid #e10600; border-radius: 50%; cursor: pointer; z-index: 20; transition: background 0.2s, transform 0.2s; box-shadow: 0 0 0 1px #fff4; transform: translate(-50%, -50%);}
+        .wheel-hotspot:hover { background: rgba(0,123,255,0.35); transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 12px #e10600;}
+        .wheel-tooltip { position: absolute; left: 50%; top: -38px; transform: translateX(-50%); font-size: 14px; padding: 4px 10px; background: var(--tooltip-bg); color: #fff; border-radius: 6px; pointer-events: none; white-space: nowrap; z-index: 1000; opacity: 0; transition: opacity 0.2s;}
+        .wheel-hotspot:hover .wheel-tooltip, .wheel-hotspot:focus .wheel-tooltip { opacity: 1;}
+        .wheel-modal-bg { display: none; position: fixed; left:0;top:0;width:100vw;height:100vh; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center;}
         .wheel-modal-bg.show { display: flex; }
-        .wheel-modal {
-            background: var(--modal-bg);
-            color: var(--primary-text);
-            border-radius: 14px;
-            padding: 30px 28px 20px 28px;
-            min-width: 260px;
-            max-width: 90vw;
-            border: 2px solid #e10600;
-            box-shadow: 0 8px 32px #000b;
-            position: relative;
-        }
-        .wheel-modal-close {
-            position: absolute; top: 10px; right: 16px;
-            font-size: 27px; color: #e10600; cursor: pointer;
-        }
-        @media (max-width: 800px) {
-            .wheel-container { width: 100vw !important; max-width: none !important; }
-        }
+        .wheel-modal { background: var(--modal-bg); color: var(--primary-text); border-radius: 14px; padding: 30px 28px 20px 28px; min-width: 260px; max-width: 90vw; border: 2px solid #e10600; box-shadow: 0 8px 32px #000b; position: relative;}
+        .wheel-modal-close { position: absolute; top: 10px; right: 16px; font-size: 27px; color: #e10600; cursor: pointer;}
+        @media (max-width: 800px) { .wheel-container { width: 100vw !important; max-width: none !important; } }
     </style>
 </head>
 <body class="min-h-screen">
@@ -357,6 +109,19 @@
                 <p id="wheel-modal-desc" class="mb-2"></p>
             </div>
         </div>
+        <div id="part-modal" class="modal" aria-modal="true" role="dialog">
+            <div class="modal-content">
+                <span class="close-modal" aria-label="Close part modal" tabindex="0">&times;</span>
+                <h2 id="part-name" class="text-2xl font-bold mb-4 text-red-600"></h2>
+                <div id="part-description" class="text-gray-300 mb-2"></div>
+                <div id="part-image" class="mb-3"></div>
+                <div id="part-facts" class="mt-4 p-4 bg-gray-800 rounded-lg hidden">
+                    <h3 class="font-bold text-red-500 mb-2">Fun Fact</h3>
+                    <p id="fact-text"></p>
+                </div>
+                <div id="part-learnmore" class="mt-3"></div>
+            </div>
+        </div>
         <script>
             const exteriorBtn = document.getElementById('exterior-btn');
             const interiorBtn = document.getElementById('interior-btn');
@@ -388,34 +153,102 @@
                 interiorView.classList.add('hidden');
                 wheelView.classList.remove('hidden');
             });
+            const carPartData = {
+                'front-wing': { name: 'Front Wing', description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple carbon fiber elements and is one of the most complex pieces on the car.', fact: 'Front wings can generate up to 25% of the car\'s total downforce.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/front_wing.webp', link: 'https://en.wikipedia.org/wiki/Wing_(automobile)#Front_wing' },
+                'nose': { name: 'Nose Cone', description: 'The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible.', fact: 'The nose must withstand an impact of 15kN without failing safety tests.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/nose.jpg', link: 'https://en.wikipedia.org/wiki/Formula_One_car#Nose_cone' },
+                'sidepods': { name: 'Sidepods', description: 'Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently.', fact: 'Temperatures inside sidepods can reach up to 120°C (248°F) during a race.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.jpg', link: 'https://en.wikipedia.org/wiki/Sidepod' },
+                'halo': { name: 'Halo Safety Device', description: 'The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars.', fact: 'The halo weighs about 7 kg but can support loads of up to 12,000 kg.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/halo.jpg', link: 'https://en.wikipedia.org/wiki/Halo_(safety_device)' },
+                'rear-wing': { name: 'Rear Wing', description: 'The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering.', fact: 'At full speed, the rear wing can generate enough downforce to theoretically allow the car to drive upside down.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/rear_wing.jpg', link: 'https://en.wikipedia.org/wiki/Wing_(automobile)#Rear_wing' },
+                'diffuser': { name: 'Diffuser', description: 'The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce.', fact: 'A well-designed diffuser can increase total car downforce by up to 40% without adding significant drag.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.jpg', link: 'https://en.wikipedia.org/wiki/Diffuser_(automotive)' },
+                'wheels': { name: 'Wheels', description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry conditions and grooved for wet.', fact: 'F1 tires can reach temperatures of 130°C (266°F) during racing.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/tyre.jpg', link: 'https://en.wikipedia.org/wiki/Wheel#Automotive_wheels' },
+                'drs': { name: 'DRS (Drag Reduction System)', description: 'The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing straight-line speed.', fact: 'DRS can increase straight-line speed by 10–15 km/h (6–9 mph).', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/drs.gif', link: 'https://en.wikipedia.org/wiki/Drag_reduction_system' },
+                'steering-wheel': { name: 'Steering Wheel', description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use the wheel to change engine modes, adjust brake balance, and communicate with the team.', fact: 'F1 steering wheels can weigh as little as 1.3 kg and take over 100 hours to design and build.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/interior/steer.jpg', link: 'https://en.wikipedia.org/wiki/Steering_wheel#Formula_One' },
+                'pedals': { name: 'Pedals', description: 'F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration.', fact: 'Brake pedal pressure can exceed 150 kg during heavy braking.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/pedals.jpg', link: 'https://en.wikipedia.org/wiki/Car_controls#Pedals' },
+                'seat': { name: "Driver's Seat", description: "The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events.", fact: "Drivers often lose 2–3 kg of weight during a race from dehydration.", image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/seat.png', link: 'https://en.wikipedia.org/wiki/Racing_seat' },
+                'halo-interior': { name: 'Halo (Interior View)', description: 'From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver\'s field of vision.', fact: 'The device has saved lives in several dramatic incidents since 2018.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/halo.png', link: 'https://en.wikipedia.org/wiki/Halo_(safety_device)' }
+            };
+            function showCarPartModal(partId) {
+                const modal = document.getElementById('part-modal');
+                const partName = document.getElementById('part-name');
+                const partDescription = document.getElementById('part-description');
+                const partFacts = document.getElementById('part-facts');
+                const factText = document.getElementById('fact-text');
+                const partImage = document.getElementById('part-image');
+                const partLearnMore = document.getElementById('part-learnmore');
+                const data = carPartData[partId];
+                partName.textContent = data ? data.name : partId;
+                partDescription.textContent = data ? data.description : '';
+                if (data && data.fact) {
+                    partFacts.classList.remove('hidden');
+                    factText.textContent = data.fact;
+                } else {
+                    partFacts.classList.add('hidden');
+                }
+                if (data && data.image) {
+                    partImage.innerHTML = `<img src="${data.image}" alt="${data.name}" class="rounded-lg shadow mb-2" style="max-width: 100%; max-height:140px; display:block;margin:0 auto;">`;
+                } else {
+                    partImage.innerHTML = '';
+                }
+                if (data && data.link) {
+                    partLearnMore.innerHTML = `<a href="${data.link}" class="text-blue-400 underline" target="_blank" rel="noopener">Learn more</a>`;
+                } else {
+                    partLearnMore.innerHTML = '';
+                }
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                modal.querySelector('.close-modal').focus();
+            }
+            function hideCarPartModal() {
+                const modal = document.getElementById('part-modal');
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            document.querySelectorAll('.car-part').forEach(part => {
+                part.addEventListener('click', () => showCarPartModal(part.getAttribute('data-part')));
+                part.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        showCarPartModal(part.getAttribute('data-part'));
+                    }
+                });
+            });
+            document.querySelector('.close-modal').addEventListener('click', hideCarPartModal);
+            document.querySelector('.close-modal').addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') hideCarPartModal();
+            });
+            window.addEventListener('keydown', e => {
+                const modal = document.getElementById('part-modal');
+                if (e.key === "Escape" && modal.style.display === 'flex') hideCarPartModal();
+            });
+            document.getElementById('part-modal').addEventListener('click', e => {
+                if (e.target === document.getElementById('part-modal')) hideCarPartModal();
+            });
             const wheelHotspotData = [
-                { label: "N", x: 343, y: 144, title: "Neutral (N) Button", desc: "Instantly puts gearbox in Neutral. Used for starts, emergencies, or when stopping the car." },
-                { label: "+10", x: 447, y: 154, title: "+10 Button", desc: "Increases selected parameter (like brake balance, engine mode) by 10 units." },
-                { label: "BW", x: 536, y: 212, title: "Brake Magic (BW)", desc: "Reconfigures brake balance for maximum front bias to heat brakes or for safety car restarts. (Famously mis-pressed by Hamilton in Baku 2021)" },
-                { label: "Entry", x: 273, y: 230, title: "'Entry' Rotary", desc: "Multi-function rotary usually for corner entry settings (diff, brake migration, etc)." },
-                { label: "EB", x: 508, y: 360, title: "Engine Braking (EB) Rotary", desc: "Adjusts the engine braking level, affecting how much the engine slows the car off-throttle." },
-                { label: "Scroll", x: 444, y: 535, title: "Unknown Left Scroll Wheel", desc: "Likely for menu navigation or fine-tuning settings." },
-                { label: "MARK", x: 570, y: 480, title: "Mark Button", desc: "Used to mark/log an event in the telemetry for later engineering analysis." },
-                { label: "OK", x: 554, y: 600, title: "OK Button", desc: "Confirms menu choices or acknowledges messages on the dash." },
-                { label: "BB-", x: 529, y: 720, title: "Brake Balance Minus (BB-)", desc: "Decreases rearward brake bias. Used to tune the car under braking." },
-                { label: "Leds", x: 619, y: 232, title: "Shift Light Strip", desc: "Colored LEDs indicate optimal shift points and/or warnings (blue/yellow/red)." },
-                { label: "Screen", x: 947, y: 352, title: "Main Display", desc: "Shows key data: gear, speed, delta, ERS, settings, alarms." },
-                { label: "STRAT", x: 728, y: 698, title: "Strat Mode Rotary", desc: "Selects engine/PU strategy modes (performance mapping, fuel, reliability)." },
-                { label: "Settings", x: 952, y: 697, title: "Multi-Function Rotary", desc: "Adjusts various advanced car systems: DEF, BITE, EXIT, INIT, RADIO, TRQ, CRUZ, VOL, REVS, DASH, DISP, BRIG, IC, WU, etc." },
-                { label: "HPP", x: 1183, y: 703, title: "HPP Mode Rotary", desc: "Likely adjusts power unit parameters (Hybrid Power Parameters), e.g., ERS deployment, harvesting, shift, etc." },
-                { label: "PL", x: 1582, y: 126, title: "PL (Pit Lane) Button", desc: "Activates pit lane speed limiter." },
-                { label: "+1", x: 1486, y: 146, title: "+1 Button", desc: "Increases selected parameter by 1 unit." },
-                { label: "PC", x: 1383, y: 212, title: "PC (Pit Confirm) Button", desc: "Confirms pit instruction, or used for pit related settings." },
-                { label: "MID", x: 1640, y: 230, title: "MID Rotary", desc: "Likely for mid-corner balance or mid-race settings." },
-                { label: "BBAL", x: 1400, y: 357, title: "BBAL Rotary", desc: "Selects brake balance preset profiles (BB+, BB-, etc)." },
-                { label: "ACS", x: 1347, y: 488, title: "ACS Button", desc: "Team-specific; often for 'Anti-Cheat' or 'Automatic Clutch System'." },
-                { label: "Scroll", x: 1457, y: 532, title: "Unknown Right Scroll Wheel", desc: "Likely for menu navigation or fine-tuning settings." },
-                { label: "TALK", x: 1362, y: 608, title: "Radio (Talk) Button", desc: "Push-to-talk: communicates with the pit wall." },
-                { label: "BB+", x: 1377, y: 723, title: "Brake Balance Plus (BB+)", desc: "Increases rearward brake bias." },
-                { label: "L Paddle", x: 433, y: 387, title: "Left Paddle", desc: "Gear up/down, clutch or DRS. (F1 wheels have dual clutches on both paddles for launch control)" },
-                { label: "R Paddle", x: 1488, y: 387, title: "Right Paddle", desc: "Gear up/down, clutch or DRS. (Typically right is gear up, left is gear down)" },
-                { label: "LEDs", x: 1296, y: 225, title: "Shift Light Strip", desc: "Colored LEDs indicate optimal shift points and/or warnings (blue/yellow/red)." },
-                { label: "LED Strip", x: 958, y: 119, title: "Main LED Strip", desc: "Main shift lights and warning indicators." }
+                { label: "Screen", x: 958, y: 352, title: "Central Display Screen", desc: "Shows lap times, deltas, fuel, tire wear, engine mode, DRS, speed, gear, and warnings for both driver and engineer." },
+                { label: "BB", x: 730, y: 390, title: "Left Rotary Encoder (Brake Bias)", desc: "Yellow/Black knob. Adjusts braking force split front/rear for stability and stopping performance." },
+                { label: "DIF", x: 958, y: 390, title: "Middle Rotary Encoder (Differential)", desc: "Aqua/Black knob. Tunes on-throttle diff settings to optimize traction and cornering." },
+                { label: "ENG", x: 1190, y: 390, title: "Right Rotary Encoder (Engine/ERS Mode)", desc: "Orange/Black knob. Controls ERS deployment/harvest, engine mapping, or fuel mix for power and energy strategy." },
+                { label: "L Scroll", x: 735, y: 300, title: "Left Scroll Wheel", desc: "Menu navigation or data selection for the display screen. Used to select and adjust values on the display." },
+                { label: "R Scroll", x: 1180, y: 300, title: "Right Scroll Wheel", desc: "Menu navigation or data selection for the display screen. Used to select and adjust values on the display." },
+                { label: "Center Select", x: 958, y: 480, title: "Menu Confirm/OK", desc: "Confirms menu selections and settings on the screen." },
+                { label: "N", x: 343, y: 144, title: "N (Neutral) Button", desc: "Shifts the gearbox into neutral. Essential for pits and emergencies." },
+                { label: "MARK", x: 570, y: 480, title: "MARK Button", desc: "Marks a lap/time/event for later engineering analysis." },
+                { label: "HSP", x: 470, y: 540, title: "HSP (Hybrid Strategy Protocol)", desc: "Activates a pre-defined hybrid deployment setting for overtaking or energy saving." },
+                { label: "BB-", x: 529, y: 720, title: "BB- (Brake Bias Decrement)", desc: "Reduces brake bias (moves braking rearward) to help with rear locking." },
+                { label: "PIT", x: 520, y: 780, title: "PIT Limiter", desc: "Activates pit lane speed limiter." },
+                { label: "DRS", x: 600, y: 780, title: "DRS Activation", desc: "Activates Drag Reduction System (DRS) when available." },
+                { label: "TALK", x: 1362, y: 608, title: "Radio (Talk) Button", desc: "Activates driver radio to communicate with the pit wall." },
+                { label: "ACS", x: 1347, y: 488, title: "ACS Button", desc: "Quick engine/hybrid adjustment access." },
+                { label: "MID", x: 1640, y: 230, title: "MID Button", desc: "Menu navigation or quick mode selection." },
+                { label: "HIP", x: 1430, y: 600, title: "HIP (Hybrid Intuitive Protocol)", desc: "Instant hybrid deployment for overtaking or defending." },
+                { label: "BB+", x: 1377, y: 723, title: "BB+ (Brake Bias Increment)", desc: "Increases brake bias (moves braking forward) to help with front locking." },
+                { label: "P1", x: 1550, y: 780, title: "P1 Button", desc: "Activates a pre-programmed driver preset (often for race start or safety car)." },
+                { label: "Strat", x: 958, y: 800, title: "Strat (Strategy) Button", desc: "Accesses quick race strategy presets." },
+                { label: "OK", x: 958, y: 870, title: "OK/Confirm Button", desc: "Confirms settings selections." },
+                { label: "Build", x: 1150, y: 870, title: "Build/Unlock Button", desc: "Used for system unlocks or software upgrades (usually garage only)." },
+                { label: "Multi Switch", x: 1230, y: 430, title: "Multi-Position Rotary Switch", desc: "Selects which data or settings are shown on the central display." },
+                { label: "L Paddle", x: 433, y: 387, title: "Left Paddle", desc: "Gear shift, clutch, or DRS. Used for launches and gear changes." },
+                { label: "R Paddle", x: 1488, y: 387, title: "Right Paddle", desc: "Gear shift, clutch, or DRS. Used for launches and gear changes." }
             ];
             function createWheelHotspots() {
                 const wheelView = document.getElementById('wheel-view');
