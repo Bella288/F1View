@@ -60,6 +60,19 @@
         <img src="https://github.com/Bella288/F1View/raw/main/images/about_ico.png" alt="About Me">
     </button>
     <span class="about-tooltip" id="about-tooltip">Learn about the creator</span>
+    <div id="about-modal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 390px;">
+            <span class="close-modal" id="close-about-modal" aria-label="Close creator modal" tabindex="0">&times;</span>
+            <h2 class="text-2xl font-bold mb-4 text-red-600">About the Creator</h2>
+            <div class="text-gray-300 mb-2">
+                <p>Hi! I'm <b>Bella Lawrence</b>, an HTML and Python programmer from Fort Wayne, Indiana.</p>
+                <p>I made this for my Dad and Sister who like Formula 1.</p>
+                <p><b>YouTube:</b> <a href="https://www.youtube.com/@SerialDesignationN-BL" class="text-blue-400 underline" target="_blank" rel="noopener">@SerialDesignationN-BL</a></p>
+                <p><b>Source:</b> <a href="https://github.com/Bella288/F1View" class="text-blue-400 underline" target="_blank" rel="noopener">github.com/Bella288/F1View</a></p>
+                <p><b>GitHub:</b> <a href="https://github.com/Bella288" class="text-blue-400 underline" target="_blank" rel="noopener">@Bella288</a></p>
+            </div>
+        </div>
+    </div>
     <div class="container mx-auto px-4 py-8">
         <header class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-2 text-red-600">F1 CAR EXPLORER</h1>
@@ -154,18 +167,18 @@
                 wheelView.classList.remove('hidden');
             });
             const carPartData = {
-                'front-wing': { name: 'Front Wing', description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple carbon fiber elements and is one of the most complex pieces on the car.', fact: 'Front wings can generate up to 25% of the car\'s total downforce.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/front_wing.webp', link: 'https://en.wikipedia.org/wiki/Wing_(automobile)#Front_wing' },
-                'nose': { name: 'Nose Cone', description: 'The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible.', fact: 'The nose must withstand an impact of 15kN without failing safety tests.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/nose.jpg', link: 'https://en.wikipedia.org/wiki/Formula_One_car#Nose_cone' },
-                'sidepods': { name: 'Sidepods', description: 'Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently.', fact: 'Temperatures inside sidepods can reach up to 120°C (248°F) during a race.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.jpg', link: 'https://en.wikipedia.org/wiki/Sidepod' },
-                'halo': { name: 'Halo Safety Device', description: 'The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars.', fact: 'The halo weighs about 7 kg but can support loads of up to 12,000 kg.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/halo.jpg', link: 'https://en.wikipedia.org/wiki/Halo_(safety_device)' },
-                'rear-wing': { name: 'Rear Wing', description: 'The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering.', fact: 'At full speed, the rear wing can generate enough downforce to theoretically allow the car to drive upside down.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/rear_wing.jpg', link: 'https://en.wikipedia.org/wiki/Wing_(automobile)#Rear_wing' },
-                'diffuser': { name: 'Diffuser', description: 'The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce.', fact: 'A well-designed diffuser can increase total car downforce by up to 40% without adding significant drag.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.jpg', link: 'https://en.wikipedia.org/wiki/Diffuser_(automotive)' },
-                'wheels': { name: 'Wheels', description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry conditions and grooved for wet.', fact: 'F1 tires can reach temperatures of 130°C (266°F) during racing.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/tyre.jpg', link: 'https://en.wikipedia.org/wiki/Wheel#Automotive_wheels' },
-                'drs': { name: 'DRS (Drag Reduction System)', description: 'The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing straight-line speed.', fact: 'DRS can increase straight-line speed by 10–15 km/h (6–9 mph).', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/drs.gif', link: 'https://en.wikipedia.org/wiki/Drag_reduction_system' },
-                'steering-wheel': { name: 'Steering Wheel', description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use the wheel to change engine modes, adjust brake balance, and communicate with the team.', fact: 'F1 steering wheels can weigh as little as 1.3 kg and take over 100 hours to design and build.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/interior/steer.jpg', link: 'https://en.wikipedia.org/wiki/Steering_wheel#Formula_One' },
-                'pedals': { name: 'Pedals', description: 'F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration.', fact: 'Brake pedal pressure can exceed 150 kg during heavy braking.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/pedals.jpg', link: 'https://en.wikipedia.org/wiki/Car_controls#Pedals' },
-                'seat': { name: "Driver's Seat", description: "The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events.", fact: "Drivers often lose 2–3 kg of weight during a race from dehydration.", image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/seat.png', link: 'https://en.wikipedia.org/wiki/Racing_seat' },
-                'halo-interior': { name: 'Halo (Interior View)', description: 'From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver\'s field of vision.', fact: 'The device has saved lives in several dramatic incidents since 2018.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/halo.png', link: 'https://en.wikipedia.org/wiki/Halo_(safety_device)' }
+                'front-wing': { name: 'Front Wing', description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple elements and endplates to direct airflow around the car.' },
+                'nose': { name: 'Nose Cone', description: 'The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible.' },
+                'sidepods': { name: 'Sidepods', description: 'Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently to the rear of the car.' },
+                'halo': { name: 'Halo Safety Device', description: 'The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars.', fact: 'The halo can withstand the weight of a London bus.' },
+                'rear-wing': { name: 'Rear Wing', description: 'The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering.', fact: 'At full speed, the rear wing produces enough downforce to flip a car upside down.' },
+                'diffuser': { name: 'Diffuser', description: 'The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce.', fact: 'A well-designed diffuser can contribute as much as 40% of a car’s total downforce.' },
+                'wheels': { name: 'Wheels', description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry and treaded for wet conditions.' },
+                'drs': { name: 'DRS (Drag Reduction System)', description: 'The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing top speed.' },
+                'steering-wheel': { name: 'Steering Wheel', description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use it to change settings, communicate, and control the car.' },
+                'pedals': { name: 'Pedals', description: 'F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration.' },
+                'seat': { name: "Driver's Seat", description: "The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events.", fact: "Drivers spend hours sitting in their seat during fittings for a perfect mold." },
+                'halo-interior': { name: 'Halo (Interior View)', description: 'From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver\'s field of vision.' }
             };
             function showCarPartModal(partId) {
                 const modal = document.getElementById('part-modal');
@@ -236,7 +249,7 @@
                 { label: "Leds", x: 619, y: 232, title: "Shift Light Strip", desc: "Colored LEDs indicate optimal shift points and/or warnings (blue/yellow/red)." },
                 { label: "Screen", x: 947, y: 352, title: "Main Display", desc: "Displays lap times, deltas, fuel, tire wear, engine and ERS modes, DRS, speed, gear, and warnings for driver and engineer." },
                 { label: "STRAT", x: 728, y: 698, title: "Strat Mode Rotary", desc: "Selects engine/PU strategy modes (performance mapping, fuel, reliability)." },
-                { label: "Settings", x: 952, y: 697, title: "Multi-Function Rotary", desc: "Adjusts various advanced car systems: DEF, BITE, EXIT, INIT, RADIO, TRQ, CRUZ, VOL, REVS, DASH, DISP, BRIG, IC, WU, etc." },
+                { label: "Settings", x: 952, y: 697, title: "Multi-Function Rotary", desc: "Adjusts various advanced car systems: DEF, BITE, EXIT, INIT, RADIO, TRQ, CRUZ, VOL, REVS, DASH, DISP, BRIG, etc." },
                 { label: "HPP", x: 1183, y: 703, title: "HPP Mode Rotary", desc: "Likely adjusts power unit parameters (Hybrid Power Parameters), e.g., ERS deployment, harvesting, shift, etc." },
                 { label: "PL", x: 1582, y: 126, title: "PL (Pit Lane) Button", desc: "Activates pit lane speed limiter." },
                 { label: "+1", x: 1486, y: 146, title: "+1 Button", desc: "Increases selected parameter by 1 unit." },
@@ -287,6 +300,61 @@
             window.addEventListener('keydown', e => {
                 if(e.key === "Escape" && document.getElementById('wheel-modal-bg').classList.contains('show')) closeWheelModal();
             });
+
+            const aboutBtn = document.getElementById('about-btn');
+            const aboutModal = document.getElementById('about-modal');
+            const closeAboutModal = document.getElementById('close-about-modal');
+            aboutBtn.addEventListener('click', () => {
+                aboutModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                closeAboutModal.focus();
+            });
+            closeAboutModal.addEventListener('click', () => {
+                aboutModal.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+            closeAboutModal.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    aboutModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+            window.addEventListener('keydown', e => {
+                if (e.key === "Escape" && aboutModal.style.display === 'flex') {
+                    aboutModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+            aboutModal.addEventListener('click', e => {
+                if (e.target === aboutModal) {
+                    aboutModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            const darkmodeToggle = document.getElementById('darkmode-toggle');
+            const darkmodeIcon = document.getElementById('darkmode-icon');
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    darkmodeIcon.innerHTML = '<i class="fas fa-moon"></i>';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    darkmodeIcon.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
+            function getSavedTheme() {
+                return localStorage.getItem('theme') || 'dark';
+            }
+            function toggleTheme() {
+                const current = getSavedTheme();
+                const newTheme = current === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            }
+            darkmodeToggle.addEventListener('click', toggleTheme);
+            setTheme(getSavedTheme());
+
             createWheelHotspots();
         </script>
     </div>
