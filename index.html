@@ -92,7 +92,7 @@
             </div>
         </div>
         <div id="exterior-view" class="car-container">
-            <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_EXTERIOR.jpg" alt="F1 Car">
+            <img src="images/F1_EXTERIOR.jpg" alt="F1 Car">
             <div class="car-part" style="left:90.63%; top:58.15%;" data-part="front-wing" aria-label="Front Wing" tabindex="0"><div class="part-tooltip" style="top:-38px;">Front Wing</div></div>
             <div class="car-part" style="left:85.94%; top:53.89%;" data-part="nose" aria-label="Nose" tabindex="0"><div class="part-tooltip" style="top:-38px;">Nose</div></div>
             <div class="car-part" style="left:48.65%; top:52.22%;" data-part="sidepods" aria-label="Sidepods" tabindex="0"><div class="part-tooltip" style="top:-38px;">Sidepods</div></div>
@@ -104,7 +104,7 @@
             <div class="car-part" style="left:19.79%; top:55.74%;" data-part="wheels" aria-label="Wheels" tabindex="0"><div class="part-tooltip" style="top:-38px;">Wheels</div></div>
         </div>
         <div id="interior-view" class="car-container hidden">
-            <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/F1_INTERIOR.jpg" alt="F1 Car Interior">
+            <img src="images/F1_INTERIOR.jpg" alt="F1 Car Interior">
             <div class="car-part" style="left:54.38%; top:69.39%;" data-part="steering-wheel" aria-label="Steering Wheel" tabindex="0"><div class="part-tooltip" style="top:-38px;">Steering Wheel</div></div>
             <div class="car-part" style="left:53.44%; top:78.54%;" data-part="pedals" aria-label="Pedals" tabindex="0"><div class="part-tooltip" style="top:46px;">Pedals</div></div>
             <div class="car-part" style="left:53.50%; top:90.41%;" data-part="seat" aria-label="Seat" tabindex="0"><div class="part-tooltip" style="top:-38px;">Seat</div></div>
@@ -113,7 +113,7 @@
             <div class="car-part" style="left:76.75%; top:44.67%;" data-part="wheels" aria-label="Wheels" tabindex="0"><div class="part-tooltip" style="top:-38px;">Wheels</div></div>
         </div>
         <div id="wheel-view" class="wheel-container hidden">
-            <img src="https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/steer.webp" alt="F1 Steering Wheel" draggable="false">
+            <img src="images/parts/interior/steer.webp" alt="F1 Steering Wheel" draggable="false">
         </div>
         <div class="wheel-modal-bg" id="wheel-modal-bg">
             <div class="wheel-modal" id="wheel-modal">
@@ -167,18 +167,18 @@
                 wheelView.classList.remove('hidden');
             });
             const carPartData = {
-                'front-wing': { name: 'Front Wing', description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple elements and endplates to direct airflow around the car.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/frontwing.webp' },
-                'nose': { name: 'Nose Cone', description: 'The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/nose.webp' },
-                'sidepods': { name: 'Sidepods', description: 'Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently to the rear of the car.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.webp' },
-                'halo': { name: 'Halo Safety Device', description: 'The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars.', fact: 'The halo can withstand the weight of a London bus.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/halo.webp' },
-                'rear-wing': { name: 'Rear Wing', description: 'The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering.', fact: 'At full speed, the rear wing produces enough downforce to flip a car upside down.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/rearwing.webp' },
-                'diffuser': { name: 'Diffuser', description: 'The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce.', fact: 'A well-designed diffuser can contribute as much as 40% of a car’s total downforce.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/diffuser.webp' },
-                'wheels': { name: 'Wheels', description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry and treaded for wet conditions.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/wheels.webp' },
-                'drs': { name: 'DRS (Drag Reduction System)', description: 'The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing top speed.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/drs.webp' },
-                'steering-wheel': { name: 'Steering Wheel', description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use it to change settings, communicate, and control the car.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/steer.webp' },
-                'pedals': { name: 'Pedals', description: 'F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/pedals.webp' },
-                'seat': { name: "Driver's Seat", description: "The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events.", fact: "Drivers spend hours sitting in their seat during fittings for a perfect mold.", image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/seat.webp' },
-                'halo-interior': { name: 'Halo (Interior View)', description: 'From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver\'s field of vision.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/halo.webp' }
+                'front-wing': { name: 'Front Wing', description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple elements and endplates to direct airflow around the car.', image: 'images/parts/exterior/frontwing.webp' },
+                'nose': { name: 'Nose Cone', description: 'The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible.', image: 'images/parts/exterior/nose.webp' },
+                'sidepods': { name: 'Sidepods', description: 'Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently to the rear of the car.', image: 'images/parts/exterior/sidepods.webp' },
+                'halo': { name: 'Halo Safety Device', description: 'The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars.', fact: 'The halo can withstand the weight of a London bus.', image: 'images/parts/exterior/halo.webp' },
+                'rear-wing': { name: 'Rear Wing', description: 'The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering.', fact: 'At full speed, the rear wing produces enough downforce to flip a car upside down.', image: 'images/parts/exterior/rearwing.webp' },
+                'diffuser': { name: 'Diffuser', description: 'The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce.', fact: 'A well-designed diffuser can contribute as much as 40% of a car’s total downforce.', image: 'images/parts/exterior/diffuser.webp' },
+                'wheels': { name: 'Wheels', description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry and treaded for wet conditions.', image: 'images/parts/exterior/wheels.webp' },
+                'drs': { name: 'DRS (Drag Reduction System)', description: 'The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing top speed.', image: 'images/parts/exterior/drs.webp' },
+                'steering-wheel': { name: 'Steering Wheel', description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use it to change settings, communicate, and control the car.', image: 'images/parts/interior/steer.webp' },
+                'pedals': { name: 'Pedals', description: 'F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration.', image: 'images/parts/interior/pedals.webp' },
+                'seat': { name: "Driver's Seat", description: "The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events.", fact: "Drivers spend hours sitting in their seat during fittings for a perfect mold.", image: 'images/parts/interior/seat.webp' },
+                'halo-interior': { name: 'Halo (Interior View)', description: 'From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver\'s field of vision.', image: 'images/parts/interior/halo.webp' }
             };
             function showCarPartModal(partId) {
                 const modal = document.getElementById('part-modal');
@@ -209,7 +209,6 @@
                 }
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-                // Focus the close button for accessibility
                 modal.querySelector('.close-modal').focus();
             }
             function hideCarPartModal() {
@@ -217,7 +216,17 @@
                 modal.style.display = 'none';
                 document.body.style.overflow = '';
             }
-            // Use all close-modal buttons for closing
+            document.querySelectorAll('.car-part').forEach(part => {
+                part.addEventListener('click', function() {
+                    showCarPartModal(this.getAttribute('data-part'));
+                });
+                part.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        showCarPartModal(this.getAttribute('data-part'));
+                    }
+                });
+            });
             document.querySelectorAll('.close-modal').forEach(el => {
                 el.addEventListener('click', hideCarPartModal);
                 el.addEventListener('keydown', e => {
