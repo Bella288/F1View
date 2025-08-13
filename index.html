@@ -167,18 +167,18 @@
                 wheelView.classList.remove('hidden');
             });
             const carPartData = {
-                'front-wing': { name: 'Front Wing', description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple elements and endplates to direct airflow around the car.' },
-                'nose': { name: 'Nose Cone', description: 'The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible.' },
-                'sidepods': { name: 'Sidepods', description: 'Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently to the rear of the car.' },
-                'halo': { name: 'Halo Safety Device', description: 'The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars.', fact: 'The halo can withstand the weight of a London bus.' },
-                'rear-wing': { name: 'Rear Wing', description: 'The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering.', fact: 'At full speed, the rear wing produces enough downforce to flip a car upside down.' },
-                'diffuser': { name: 'Diffuser', description: 'The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce.', fact: 'A well-designed diffuser can contribute as much as 40% of a car’s total downforce.' },
-                'wheels': { name: 'Wheels', description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry and treaded for wet conditions.' },
-                'drs': { name: 'DRS (Drag Reduction System)', description: 'The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing top speed.' },
-                'steering-wheel': { name: 'Steering Wheel', description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use it to change settings, communicate, and control the car.' },
-                'pedals': { name: 'Pedals', description: 'F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration.' },
-                'seat': { name: "Driver's Seat", description: "The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events.", fact: "Drivers spend hours sitting in their seat during fittings for a perfect mold." },
-                'halo-interior': { name: 'Halo (Interior View)', description: 'From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver\'s field of vision.' }
+                'front-wing': { name: 'Front Wing', description: 'The front wing is the first point of contact for airflow and is fundamental to a car’s aerodynamic performance. It\'s made from multiple elements and endplates to direct airflow around the car.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/frontwing.webp' },
+                'nose': { name: 'Nose Cone', description: 'The nose cone is the forward-most structure, designed to pass stringent crash tests while being as aerodynamic and lightweight as possible.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/nose.webp' },
+                'sidepods': { name: 'Sidepods', description: 'Sidepods house radiators, electronics, and sometimes cooling for the hybrid system. Their outer surfaces are sculpted to channel air efficiently to the rear of the car.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/sidepods.webp' },
+                'halo': { name: 'Halo Safety Device', description: 'The halo is a titanium structure mounted above the cockpit to protect the driver’s head from debris or other cars.', fact: 'The halo can withstand the weight of a London bus.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/halo.webp' },
+                'rear-wing': { name: 'Rear Wing', description: 'The rear wing provides crucial downforce, helping maintain grip at high speeds and during cornering.', fact: 'At full speed, the rear wing produces enough downforce to flip a car upside down.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/rearwing.webp' },
+                'diffuser': { name: 'Diffuser', description: 'The diffuser is the upward-swept rear section of the floor, essential for generating ground effect downforce.', fact: 'A well-designed diffuser can contribute as much as 40% of a car’s total downforce.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/diffuser.webp' },
+                'wheels': { name: 'Wheels', description: 'F1 wheels are made from high-strength magnesium alloy, combining lightness and durability. They are fitted with Pirelli tires, which are slick for dry and treaded for wet conditions.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/wheels.webp' },
+                'drs': { name: 'DRS (Drag Reduction System)', description: 'The Drag Reduction System (DRS) allows drivers to open a flap in the rear wing when within one second of a car ahead, reducing drag and increasing top speed.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/exterior/drs.webp' },
+                'steering-wheel': { name: 'Steering Wheel', description: 'An F1 steering wheel is an advanced control center, featuring more than 20 buttons, rotary switches, and paddles. Drivers use it to change settings, communicate, and control the car.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/steer.webp' },
+                'pedals': { name: 'Pedals', description: 'F1 cars have just two pedals: brake (left) and throttle (right). The brake pedal operates carbon-carbon brakes capable of generating over 5G of deceleration.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/pedals.webp' },
+                'seat': { name: "Driver's Seat", description: "The seat is custom-molded to each driver using foam or resin, providing maximum support and safety during high G-force events.", fact: "Drivers spend hours sitting in their seat during fittings for a perfect mold.", image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/seat.webp' },
+                'halo-interior': { name: 'Halo (Interior View)', description: 'From inside the cockpit, the halo appears as a central pillar and two side arms, framing the driver\'s field of vision.', image: 'https://raw.githubusercontent.com/Bella288/F1View/main/images/parts/interior/halo.webp' }
             };
             function showCarPartModal(partId) {
                 const modal = document.getElementById('part-modal');
@@ -209,6 +209,7 @@
                 }
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
+                // Focus the close button for accessibility
                 modal.querySelector('.close-modal').focus();
             }
             function hideCarPartModal() {
@@ -216,18 +217,12 @@
                 modal.style.display = 'none';
                 document.body.style.overflow = '';
             }
-            document.querySelectorAll('.car-part').forEach(part => {
-                part.addEventListener('click', () => showCarPartModal(part.getAttribute('data-part')));
-                part.addEventListener('keydown', e => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        showCarPartModal(part.getAttribute('data-part'));
-                    }
+            // Use all close-modal buttons for closing
+            document.querySelectorAll('.close-modal').forEach(el => {
+                el.addEventListener('click', hideCarPartModal);
+                el.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') hideCarPartModal();
                 });
-            });
-            document.querySelector('.close-modal').addEventListener('click', hideCarPartModal);
-            document.querySelector('.close-modal').addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') hideCarPartModal();
             });
             window.addEventListener('keydown', e => {
                 const modal = document.getElementById('part-modal');
